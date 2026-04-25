@@ -1,0 +1,51 @@
+{
+  "Id": "OrthogonalRotation",
+  "Title": "Orthogonal Rotation",
+  "Color": "Orange",
+  "Content" : [
+    {
+      "Id" : "Yaw",
+      "Type" : "SmallString",
+      "Options" : {
+        "Label" : "Yaw",
+        "Default" : "None",
+        "Width" : 150,
+        "Description" : "None | Ninety | OneEighty | TwoSeventy"
+      }
+    },
+    {
+      "Id" : "Pitch",
+      "Type" : "SmallString",
+      "Options" : {
+        "Label" : "Pitch",
+        "Default" : "None",
+        "Width" : 150,
+        "Description" : "None | Ninety | OneEighty | TwoSeventy"
+      }
+    },
+    {
+      "Id" : "Roll",
+      "Type" : "SmallString",
+      "Options" : {
+        "Label" : "Roll",
+        "Default" : "None",
+        "Width" : 150,
+        "Description" : "None | Ninety | OneEighty | TwoSeventy"
+      }
+    }
+  ],
+  "Outputs": [
+  ],
+  "Inputs": [
+    {
+      "Id": "Output",
+      "Type": "OrthogonalRotation.Connection",
+      "Color": "Orange"
+    }
+  ],
+  "Schema": {
+    "Yaw" : "Yaw",
+    "Pitch" : "Pitch",
+    "Roll" : "Roll"
+  }
+}

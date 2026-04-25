@@ -1,0 +1,82 @@
+{
+  "Id": "Cylinder.Density",
+  "Title": "Cylinder Density",
+  "Color": "Purple",
+  "Description" : "The Cylinder generates a cylindrical shape, crazy I know. You can spin it by giving it a new Y axis and a spin angle (in degrees).",
+  "Content": [
+    {
+      "Id" : "ExportAs",
+      "Type" : "SmallString",
+      "Options" : {
+        "Label" : "ExportAs",
+        "Default" : "",
+        "Width" : 250
+      }
+    },
+    {
+      "Id": "Skip",
+      "Type": "Checkbox",
+      "Options": {
+        "Label": "Skip",
+        "Default" : false
+      }
+    },
+    {
+      "Id": "Spin",
+      "Type": "Float",
+      "Options": {
+        "Label": "Spin",
+        "Default" : 0.0,
+        "Description" : "Determines the angle in degrees by which to spin the Ellipsoid around its original Y axis."
+      }
+    }
+  ],
+  "Outputs": [
+    {
+      "Id": "AxialCurve",
+      "Type": "CurveConnection",
+      "Color": "Orange",
+      "Label" : "AxialCurve",
+      "Description" : "Maps the Distance from the Cylinder’s XZ-plane to a Density value."
+    },
+    {
+      "Id": "RadialCurve",
+      "Type": "CurveConnection",
+      "Color": "Orange",
+      "Label" : "RadialCurve",
+      "Description" : "Maps the Distance from the Cylinder’s Y axis to a Density value."
+    },
+    {
+      "Id": "NewYAxis",
+      "Type": "Point3D.Connection",
+      "Color": "Orange",
+      "Label" : "NewYAxis",
+      "Description" : "In combination with the spin, this lets you rotate the Cylinder around its origin by aligning its original Y-axis with the provided one."
+    }
+  ],
+  "Inputs": [
+    {
+      "Id": "DensityOutput",
+      "Type": "DensityConnection",
+      "Color": "Purple"
+    }
+  ],
+  "Schema": {
+    "Type" : "Cylinder",
+    "ExportAs" : "ExportAs",
+    "Skip" : "Skip",
+    "Spin" : "Spin",
+    "RadialCurve" : {
+      "Node" : "CurveVariants",
+      "Pin" : "RadialCurve"
+    },
+    "AxialCurve" : {
+      "Node" : "CurveVariants",
+      "Pin" : "AxialCurve"
+    },
+    "NewYAxis" : {
+      "Node" : "Point3D",
+      "Pin" : "NewYAxis"
+    }
+  }
+}

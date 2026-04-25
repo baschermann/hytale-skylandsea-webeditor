@@ -1,0 +1,74 @@
+{
+  "Id": "FieldFunctionPositions",
+  "Title": "FieldFunction Positions",
+  "Color": "Blue",
+  "Description" : "Enables masking out positions using a Density field. The delimiters determine the regions of the Density field where positions are kept.",
+  "Content" : [
+    {
+      "Id" : "ExportAs",
+      "Type" : "SmallString",
+      "Options" : {
+        "Label" : "ExportAs",
+        "Default" : "",
+        "Width" : 250
+      }
+    },
+    {
+      "Id": "Skip",
+      "Type": "Checkbox",
+      "Options": {
+        "Label": "Skip",
+        "Default" : false
+      }
+    }
+  ],
+  "Outputs": [
+    {
+      "Id": "PositionsConnection",
+      "Type": "PositionsConnection",
+      "Color": "Blue",
+      "Multiple" : false,
+      "Label" : "Positions",
+      "Description" : "The positions on which the mask is applied."
+    },
+    {
+      "Id": "DensityConnection",
+      "Type": "DensityConnection",
+      "Color": "Purple",
+      "Multiple" : false,
+      "Label" : "Density"
+    },
+    {
+      "Id": "DelimiterConnections",
+      "Type": "PositionsDelimiterConnection",
+      "Color": "Orange",
+      "Multiple" : true,
+      "Label" : "Delimiters",
+      "Description" : "Density value ranges that keep input positions."
+    }
+  ],
+  "Inputs": [
+    {
+      "Id": "Output",
+      "Type": "PositionsConnection",
+      "Color": "Blue"
+    }
+  ],
+  "Schema": {
+    "Type" : "FieldFunction",
+    "ExportAs" : "ExportAs",
+    "Skip" : "Skip",
+    "FieldFunction" : {
+      "Node" : "DensityNodeVariants",
+      "Pin" : "DensityConnection"
+    },
+    "Delimiters" : {
+      "Node" : "Delimiter",
+      "Pin" : "DelimiterConnections"
+    },
+    "Positions" : {
+      "Node" : "PositionsVariants",
+      "Pin" : "PositionsConnection"
+    }
+  }
+}

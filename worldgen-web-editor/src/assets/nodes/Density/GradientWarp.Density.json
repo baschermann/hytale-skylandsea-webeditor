@@ -1,0 +1,93 @@
+{
+  "Id": "GradientWarp.Density",
+  "Title": "GradientWarp Density",
+  "Color": "Purple",
+  "Description" : "Warps the first input based on the gradient of the second input Density field. This works similar to the legacy warping functionality, except it also works in 3D and you can plug any Density field into it.\nThis implementation is relatively expensive because it calculates the gradient of the input Density field. I recommend optimizing the use of this node by isolating and minimizing its use space. A fast version of this node can be implemented which would let you only use Simplex noise to warp. This will depend on the feedback and priorities.\nThis node incorporates a Cache2D so you don’t need to use a Cache2D node on its output.",
+  "Content" : [
+    {
+      "Id" : "ExportAs",
+      "Type" : "SmallString",
+      "Options" : {
+        "Label" : "ExportAs",
+        "Default" : "",
+        "Width" : 250
+      }
+    },
+    {
+      "Id": "Skip",
+      "Type": "Checkbox",
+      "Options": {
+        "Label": "Skip",
+        "Default" : false
+      }
+    },
+    {
+      "Id": "SampleRange",
+      "Type": "Float",
+      "Options": {
+        "Label": "SampleRange",
+        "Default" : 1,
+        "Width" : 70,
+        "Description" : "Distance between samples. Recommended value: 1."
+      }
+    },
+    {
+      "Id": "WarpFactor",
+      "Type": "Float",
+      "Options": {
+        "Label": "WarpFactor",
+        "Default" : 1,
+        "Width" : 70,
+        "Description" : "With greater values you get more warping."
+      }
+    },
+    {
+      "Id": "2D",
+      "Type": "Checkbox",
+      "Options": {
+        "Label": "2D Output",
+        "Default" : false,
+        "Description" : "If true the output of this node is 2D. An internal Cache2D is used."
+      }
+    },
+    {
+      "Id": "YFor2D",
+      "Type": "Float",
+      "Options": {
+        "Label": "Y for 2D",
+        "Default" : 0,
+         "Description" : "Default is 0. The Y coordinate used from the input to calculate the gradient from."
+      }
+    }
+  ],
+  "Outputs": [
+    {
+      "Id" : "DensityInputs",
+      "Type" : "DensityConnection",
+      "Color" : "Purple",
+      "Multiple" : true,
+      "Label" : "Inputs",
+      "Description" : "0: Density that is warped.\n1: Warping source."
+    }
+  ],
+  "Inputs": [
+    {
+      "Id": "DensityOutput",
+      "Type": "DensityConnection",
+      "Color": "Purple"
+    }
+  ],
+  "Schema": {
+    "Type" : "GradientWarp",
+    "ExportAs" : "ExportAs",
+    "Skip" : "Skip",
+    "SampleRange" : "SampleRange",
+    "WarpFactor" : "WarpFactor",
+    "2D" : "2D",
+    "YFor2D" : "YFor2D",
+    "Inputs" : {
+      "Node" : "DensityNodeVariants",
+      "Pin" : "DensityInputs"
+    }
+  }
+}

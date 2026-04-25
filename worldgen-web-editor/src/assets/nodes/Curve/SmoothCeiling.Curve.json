@@ -1,0 +1,62 @@
+{
+  "Id": "SmoothCeiling.Curve",
+  "Title": "SmoothCeiling Curve",
+  "Color": "Orange",
+  "Description" : "This curve puts a ceiling on the output of the child curve asset. As the curve approaches the ceiling within the provided range, it gets smoothed.",
+  "Content" : [
+    {
+      "Id" : "ExportAs",
+      "Type" : "SmallString",
+      "Options" : {
+        "Label" : "ExportAs",
+        "Default" : "",
+        "Width" : 250
+      }
+    },
+    {
+      "Id": "Ceiling_",
+      "Type": "Float",
+      "Options": {
+        "Label": "Ceiling",
+        "Default" : 0.0,
+        "Width" : 100,
+        "Description" : "The maximum value this curve will output."
+      }
+    },
+    {
+      "Id": "Range",
+      "Type": "Float",
+      "Options": {
+        "Label": "Range",
+        "Default" : 0.0,
+        "Width" : 100,
+        "Description" : "The range determines how much smoothing is applied. A good starting value would be ¼ of the known range of your child curve."
+      }
+    }
+  ],
+  "Outputs": [
+    {
+      "Id": "Curve",
+      "Type": "CurveConnection",
+      "Color": "Orange",
+      "Label" : "Curve"
+    }
+  ],
+  "Inputs": [
+    {
+      "Id": "Input",
+      "Type": "CurveConnection",
+      "Color": "Orange"
+    }
+  ],
+  "Schema": {
+    "Type" : "SmoothCeiling",
+    "ExportAs" : "ExportAs",
+    "Ceiling" : "Ceiling_",
+    "Range" : "Range",
+    "Curve" : {
+      "Node" : "CurveVariants",
+      "Pin" : "Curve"
+    }
+  }
+}

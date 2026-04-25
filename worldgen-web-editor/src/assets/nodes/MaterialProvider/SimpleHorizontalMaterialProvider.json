@@ -1,0 +1,86 @@
+{
+  "Id": "SimpleHorizontalMaterialProvider",
+  "Title": "SimpleHorizontal MaterialProvider",
+  "Color": "110,63,16",
+  "Description" : "Applies the child Material Provider to a vertical range.\nIf a BaseHeight is provided, the TopY and BottomY values are relative to the referenced DecimalConstant. Otherwise, they’re relative to the world’s Y coordinate.",
+  "Content": [
+    {
+      "Id" : "ExportAs",
+      "Type" : "SmallString",
+      "Options" : {
+        "Label" : "ExportAs",
+        "Default" : "",
+        "Width" : 250
+      }
+    },
+    {
+      "Id" : "TopY",
+      "Type" : "Int",
+      "Options" : {
+        "Label" : "TopY",
+        "Default" : "64",
+        "Width" : 50,
+        "Description" : "Y coordinate. Defines the vertical top exclusive limit of the region."
+      }
+    },
+    {
+      "Id" : "TopBaseHeight",
+      "Type" : "SmallString",
+      "Options" : {
+        "Label" : "Top BaseHeight",
+        "Default" : "",
+        "Width" : 250,
+        "Description" : "DecimalConstant name."
+      }
+    },
+    {
+      "Id" : "BottomY",
+      "Type" : "Int",
+      "Options" : {
+        "Label" : "BottomY",
+        "Default" : "0",
+        "Width" : 50,
+        "Description" : "Y coordinate. Defines the vertical bottom inclusive limit of the region."
+      }
+    },
+    {
+      "Id" : "BottomBaseHeight",
+      "Type" : "SmallString",
+      "Options" : {
+        "Label" : "Bottom BaseHeight",
+        "Default" : "",
+        "Width" : 250,
+        "Description" : "DecimalConstant name."
+      }
+    }
+  ],
+  "Outputs": [
+    {
+      "Id": "MaterialPin",
+      "Type": "MaterialProviderConnection",
+      "Color": "110,63,16",
+      "Multiple" : false,
+      "Label" : "Material",
+      "Description" : "Slot to query for the selected region."
+    }
+  ],
+  "Inputs": [
+    {
+      "Id": "OutputPin",
+      "Type": "MaterialProviderConnection",
+      "Color": "110,63,16"
+    }
+  ],
+  "Schema": {
+    "Type" : "SimpleHorizontal",
+    "ExportAs" : "ExportAs",
+    "TopY" : "TopY",
+    "TopBaseHeight" : "TopBaseHeight",
+    "BottomY" : "BottomY",
+    "BottomBaseHeight" : "BottomBaseHeight",
+    "Material" : {
+      "Node" : "MaterialProviderVariants",
+      "Pin" : "MaterialPin"
+    }
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "Id": "PositionsTwist.Density",
+  "Title": "PositionsTwist Density",
+  "Color": "Purple",
+  "Description" : "Twists the first input’s Density field around the Positions.",
+  "Content": [
+    {
+      "Id" : "ExportAs",
+      "Type" : "SmallString",
+      "Options" : {
+        "Label" : "ExportAs",
+        "Default" : "",
+        "Width" : 250
+      }
+    },
+    {
+      "Id": "Skip",
+      "Type": "Checkbox",
+      "Options": {
+        "Label": "Skip",
+        "Default" : false
+      }
+    },
+    {
+      "Id" : "MaxDistance",
+      "Type" : "Float",
+      "Options" : {
+        "Label" : "MaxDistance",
+        "Default" : 10,
+        "Width" : 100,
+        "Description" : "The value represents how big the area of effect is in block units."
+      }
+    },
+    {
+      "Id" : "NormalizeDistance",
+      "Type" : "Checkbox",
+      "Options" : {
+        "Label" : "NormalizeDistance",
+        "Default" : true,
+        "Description" : "Default is true. If true then the Curve’s input unit is normalized to the MaxDistance value, otherwise if false the Curve’s input unit is in blocks."
+      }
+    },
+    {
+      "Id" : "ZeroPositionsY",
+      "Type" : "Checkbox",
+      "Options" : {
+        "Label" : "ZeroPositionsY",
+        "Default" : false,
+        "Description" : "Flattens the positions input to y=0."
+      }
+    }
+  ],
+  "Outputs": [
+    {
+      "Id" : "DensityInputs",
+      "Type" : "DensityConnection",
+      "Color" : "Purple",
+      "Multiple" : true,
+      "Label" : "Inputs",
+      "Description" : "0: Input."
+    },
+    {
+      "Id": "Positions",
+      "Type": "PositionsConnection",
+      "Color": "Blue",
+      "Label" : "Positions",
+      "Description" : "The Positions are the anchors that pinch and expand the Density field around them."
+    },
+    {
+      "Id": "TwistCurve",
+      "Type": "CurveConnection",
+      "Color": "Orange",
+      "Label" : "TwistCurve",
+      "Description" : "The curve determines how the Density field is twisted depending on how close it is to a position."
+    },
+    {
+      "Id": "TwistAxis",
+      "Type": "Point3D.Connection",
+      "Color": "Orange",
+      "Label" : "TwistAxis",
+      "Description" : "The axis around which the twisting happens."
+    }
+  ],
+  "Inputs": [
+    {
+      "Id": "DensityOutput",
+      "Type": "DensityConnection",
+      "Color": "Purple"
+    }
+  ],
+  "Schema": {
+    "Type" : "PositionsTwist",
+    "ExportAs" : "ExportAs",
+    "Skip" : "Skip",
+    "MaxDistance" : "MaxDistance",
+    "ZeroPositionsY" : "ZeroPositionsY",
+    "NormalizeDistance" : "NormalizeDistance",
+    "Positions" : {
+      "Node" : "PositionsVariants",
+      "Pin" : "Positions"
+    },
+    "TwistAxis" : {
+      "Node" : "Point3D",
+      "Pin" : "TwistAxis"
+    },
+    "TwistCurve" : {
+      "Node" : "CurveVariants",
+      "Pin" : "TwistCurve"
+    },
+    "Inputs" : {
+      "Node" : "DensityNodeVariants",
+      "Pin" : "DensityInputs"
+    }
+  }
+}

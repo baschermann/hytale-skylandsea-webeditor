@@ -1,0 +1,30 @@
+{
+  "Id": "PCNDistanceFunction",
+  "Title": "Distance Function",
+  "Color": "Olive",
+  "Description" : "Determines the way in which the distance to the closest Position is calculated.",
+  "Content": [
+    {
+      "Id" : "Type",
+      "Type" : "SmallString",
+      "Options" : {
+        "Label" : "Type",
+        "Default" : "Euclidean",
+        "Width" : 100,
+        "Description" : "Euclidean | Manhattan"
+      }
+    }
+  ],
+  "Outputs": [
+  ],
+  "Inputs": [
+    {
+      "Id": "PCN",
+      "Type": "DistanceFunctionPCNConnection",
+      "Color": "Olive"
+    }
+  ],
+  "Schema": {
+    "Type" : "Type"
+  }
+}

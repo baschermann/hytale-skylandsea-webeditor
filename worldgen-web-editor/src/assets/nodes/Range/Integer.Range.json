@@ -1,0 +1,38 @@
+{
+  "Id": "Integer.Range",
+  "Title": "Integer Range",
+  "Color": "Orange",
+  "Content": [
+    {
+      "Id" : "MinInclusive",
+      "Type" : "Int",
+      "Options" : {
+        "Label" : "MinInclusive",
+        "Default" : 0.0,
+        "Width" : 50
+      }
+    },
+    {
+      "Id" : "MaxExclusive",
+      "Type" : "Int",
+      "Options" : {
+        "Label" : "MaxExclusive",
+        "Default" : 1.0,
+        "Width" : 50
+      }
+    }
+  ],
+  "Outputs": [
+  ],
+  "Inputs": [
+    {
+      "Id": "Output",
+      "Type": "Integer.Range.Connection",
+      "Color": "Orange"
+    }
+  ],
+  "Schema": {
+    "MinInclusive" : "MinInclusive",
+    "MaxExclusive" : "MaxExclusive"
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "Id": "SolidLine.Density",
+  "Title": "Solid Line Density",
+  "Color": "Purple",
+  "Content": [
+    {
+      "Id": "ExportAs",
+      "Type": "SmallString",
+      "Options": {
+        "Label": "ExportAs",
+        "Default": "",
+        "Width": 250
+      }
+    },
+    {
+      "Id": "Skip",
+      "Type": "Checkbox",
+      "Options": {
+        "Label": "Skip",
+        "Default": false
+      }
+    },
+    {
+      "Id": "Width",
+      "Type": "Int",
+      "Options": {
+        "Label": "Width (X/Z)",
+        "Default": 3,
+        "Width": 100
+      }
+    },
+    {
+      "Id": "Height",
+      "Type": "Int",
+      "Options": {
+        "Label": "Height (Y)",
+        "Default": 3,
+        "Width": 100
+      }
+    },
+    {
+      "Id": "MaxDistance",
+      "Type": "Float",
+      "Options": {
+        "Label": "MaxDistance (query + max bridge span)",
+        "Default": 128,
+        "Width": 100
+      }
+    },
+    {
+      "Id": "InnerRadius",
+      "Type": "Float",
+      "Options": {
+        "Label": "InnerRadius (horiz. endpoint inset, Y kept)",
+        "Default": 0,
+        "Width": 100
+      }
+    }
+  ],
+  "Outputs": [
+    {
+      "Id": "Positions",
+      "Type": "PositionsConnection",
+      "Color": "Blue",
+      "Label": "Positions"
+    }
+  ],
+  "Inputs": [
+    {
+      "Id": "DensityOutput",
+      "Type": "DensityConnection",
+      "Color": "Purple"
+    }
+  ],
+  "Schema": {
+    "Type": "SolidLine",
+    "ExportAs": "ExportAs",
+    "Skip": "Skip",
+    "Width": "Width",
+    "Height": "Height",
+    "MaxDistance": "MaxDistance",
+    "InnerRadius": "InnerRadius",
+    "Positions": {
+      "Node": "PositionsVariants",
+      "Pin": "Positions"
+    }
+  }
+}

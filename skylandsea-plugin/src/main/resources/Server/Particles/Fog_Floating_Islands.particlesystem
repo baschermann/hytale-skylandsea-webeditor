@@ -1,0 +1,31 @@
+{
+  "Spawners": [
+    {
+      "SpawnerId": "Fog_Floating_Islands",
+      "PositionOffset": {
+        "X": 0.0,
+        "Y": -60,
+        "Z": 0.0
+      },
+      "FixedRotation": true,
+      "EmitOffset": {
+        "X": {
+          "Min": 0
+        }
+      }
+    },
+    {
+      "SpawnerId": "Fog_Floating_Islands_Highlights",
+      "PositionOffset": {
+        "X": 0.0,
+        "Y": -50,
+        "Z": 0.0
+      },
+      "FixedRotation": true,
+      "TotalSpawners": 1
+    }
+  ],
+  "CullDistance": 1024,
+  "IsImportant": false,
+  "BoundingRadius": 100
+}

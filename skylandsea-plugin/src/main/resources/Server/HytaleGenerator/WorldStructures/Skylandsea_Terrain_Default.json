@@ -1,0 +1,38 @@
+{
+  "Type": "NoiseRange",
+  "Biomes": [
+    {
+      "Biome": "Skylandsea",
+      "Min": -1,
+      "Max": 1
+    }
+  ],
+  "DefaultBiome": "Skylandsea",
+  "DefaultTransitionDistance": 48,
+  "MaxBiomeEdgeDistance": 48,
+  "Density": {
+    "Type": "Imported",
+    "Name": "Biome-Map"
+  },
+  "SpawnPositions": {
+    "Type": "Imported",
+    "Name": "ClosestIslandPosition"
+  },
+  "ContentFields": [
+    {
+      "Type": "BaseHeight",
+      "Name": "Base",
+      "Y": 100
+    },
+    {
+      "Type": "BaseHeight",
+      "Name": "Water",
+      "Y": 100
+    },
+    {
+      "Type": "BaseHeight",
+      "Name": "Bedrock",
+      "Y": 0
+    }
+  ]
+}

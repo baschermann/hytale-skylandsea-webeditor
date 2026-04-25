@@ -1,0 +1,29 @@
+{
+  "$Comment": "Default instance overridden by Skylandsea plugin",
+  "RequiredPlugins": {},
+  "ChunkStorage": {
+    "Type": "Hytale"
+  },
+  "GameMode": "Adventure",
+  "IsPvpEnabled": false,
+  "IsSpawningNPC": true,
+  "GameTime": "0001-01-01T07:00:00Z",
+  "UUID": {
+    "$binary": "AZKxiVAMQfWIS0qBsBfjzQ==",
+    "$type": "04"
+  },
+  "GameplayConfig": "Default",
+  "IsCompassUpdating": true,
+  "IsTicking": true,
+  "IsGameTimePaused": false,
+  "IsObjectiveMarkersEnabled": true,
+  "IsAllNPCFrozen": false,
+  "IsSavingPlayers": true,
+  "WorldGen": {
+    "Type": "HytaleGenerator",
+    "WorldStructure": "Skylandsea_Terrain_Default"
+  },
+  "IsSpawnMarkersEnabled": true,
+  "DeleteOnRemove": false,
+  "Version": 2
+}

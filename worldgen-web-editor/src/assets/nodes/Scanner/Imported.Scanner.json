@@ -1,0 +1,40 @@
+{
+  "Id": "Imported.Scanner",
+  "Title": "Imported Scanner",
+  "Color": "LightPurple",
+  "Description" : "Imports an exported Scanner.",
+  "Content" : [
+    {
+      "Id": "Skip",
+      "Type": "Checkbox",
+      "Options": {
+        "Label": "Skip",
+        "Default" : false
+      }
+    },
+    {
+      "Id" : "Name",
+      "Type" : "SmallString",
+      "Options" : {
+        "Label" : "Name",
+        "Default" : "",
+        "Width" : 250,
+        "Description" : "The exported Scanner."
+      }
+    }
+  ],
+  "Outputs": [
+  ],
+  "Inputs": [
+    {
+      "Id": "Output",
+      "Type": "Scanner.Connection",
+      "Color": "LightPurple"
+    }
+  ],
+  "Schema": {
+    "Type" : "Imported",
+    "Skip" : "Skip",
+    "Name" : "Name"
+  }
+}

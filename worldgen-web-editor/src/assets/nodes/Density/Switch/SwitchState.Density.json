@@ -1,0 +1,62 @@
+{
+  "Id": "SwitchState.Density",
+  "Title": "SwitchState Density",
+  "Color": "Purple",
+  "Description" : "Sets the contextual SwitchState for the downstream Density branch.",
+  "Content": [
+    {
+      "Id" : "ExportAs",
+      "Type" : "SmallString",
+      "Options" : {
+        "Label" : "ExportAs",
+        "Default" : "",
+        "Width" : 250
+      }
+    },
+    {
+      "Id": "Skip",
+      "Type": "Checkbox",
+      "Options": {
+        "Label": "Skip",
+        "Default" : false
+      }
+    },
+    {
+      "Id" : "SwitchState_",
+      "Type" : "SmallString",
+      "Options" : {
+        "Label" : "SwitchState",
+        "Default" : "",
+        "Width" : 250,
+        "Description" : "Name of the SwitchState to set for the children of this node."
+      }
+    }
+  ],
+  "Outputs": [
+    {
+      "Id": "DensityInputs",
+      "Type": "DensityConnection",
+      "Color": "Purple",
+      "Multiple" : true,
+      "Label" : "Inputs",
+      "Description" : "0: Input."
+    }
+  ],
+  "Inputs": [
+    {
+      "Id": "DensityOutput",
+      "Type": "DensityConnection",
+      "Color": "Purple"
+    }
+  ],
+  "Schema": {
+    "Type" : "SwitchState",
+    "ExportAs" : "ExportAs",
+    "Skip" : "Skip",
+    "SwitchState" : "SwitchState_",
+    "Inputs" : {
+      "Node" : "DensityNodeVariants",
+      "Pin" : "DensityInputs"
+    }
+  }
+}

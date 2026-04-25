@@ -1,0 +1,31 @@
+{
+  "Id": "CurvePCNReturnType",
+  "Title": "Curve ReturnType",
+  "Color": "DarkPink",
+  "Description" : "The Curve ReturnType allows you to use a Curve asset to define the value of the Density field in terms of its distance from the Positions.",
+  "Content": [
+  ],
+  "Outputs": [
+    {
+      "Id" : "Curve",
+      "Type" : "CurveConnection",
+      "Color" : "Orange",
+      "Label" : "Curve",
+      "Description" : "The Density value of each cell is defined by the curve. The curve’s input is the distance in blocks between the closest Position, and the Curve’s output becomes the field’s value."
+    }
+  ],
+  "Inputs": [
+    {
+      "Id": "PCN",
+      "Type": "ReturnTypePCNConnection",
+      "Color": "DarkPink"
+    }
+  ],
+  "Schema": {
+    "Type" : "Curve",
+    "Curve" : {
+      "Node" : "CurveVariants",
+      "Pin" : "Curve"
+    }
+  }
+}

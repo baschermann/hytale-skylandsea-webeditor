@@ -1,0 +1,40 @@
+{
+  "Id": "Imported.Prop",
+  "Title": "Imported Prop",
+  "Color": "Green",
+  "Description" : "Imports an exported Prop.",
+  "Content" : [
+    {
+      "Id": "Skip",
+      "Type": "Checkbox",
+      "Options": {
+        "Label": "Skip",
+        "Default" : false
+      }
+    },
+    {
+      "Id" : "Name",
+      "Type" : "SmallString",
+      "Options" : {
+        "Label" : "Name",
+        "Default" : "",
+        "Width" : 250,
+        "Description" : "The exported Prop name."
+      }
+    }
+  ],
+  "Outputs": [
+  ],
+  "Inputs": [
+    {
+      "Id": "Output",
+      "Type": "PropConnection",
+      "Color": "Green"
+    }
+  ],
+  "Schema": {
+    "Type" : "Imported",
+    "Name" : "Name",
+    "Skip" : "Skip"
+  }
+}

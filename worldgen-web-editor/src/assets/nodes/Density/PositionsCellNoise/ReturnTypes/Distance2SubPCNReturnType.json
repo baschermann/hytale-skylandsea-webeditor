@@ -1,0 +1,20 @@
+{
+  "Id": "Distance2SubPCNReturnType",
+  "Title": "Distance2Sub ReturnType",
+  "Color": "DarkPink",
+  "Description" : "The Distance2Sub ReturnType works like the traditional CellNoise's 'Distance2Sub' return type.",
+  "Content": [
+  ],
+  "Outputs": [
+  ],
+  "Inputs": [
+    {
+      "Id": "PCN",
+      "Type": "ReturnTypePCNConnection",
+      "Color": "DarkPink"
+    }
+  ],
+  "Schema": {
+    "Type" : "Distance2Sub"
+  }
+}

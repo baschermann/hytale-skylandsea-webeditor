@@ -1,0 +1,62 @@
+{
+  "Id": "YOverridePositions.Positions",
+  "Title": "Y Override Positions",
+  "Color": "Blue",
+  "Description": "Runs the child Positions provider with vertical bounds widened if needed so SquareGrid2d can still emit, then sets every output position's y to Value (like YOverride.Density for aligning grids and PCN with island height).",
+  "Content": [
+    {
+      "Id": "ExportAs",
+      "Type": "SmallString",
+      "Options": {
+        "Label": "ExportAs",
+        "Default": "",
+        "Width": 250
+      }
+    },
+    {
+      "Id": "Skip",
+      "Type": "Checkbox",
+      "Options": {
+        "Label": "Skip",
+        "Default": false
+      }
+    },
+    {
+      "Id": "Value",
+      "Type": "Float",
+      "Options": {
+        "Label": "Value",
+        "Default": 0,
+        "Width": 100,
+        "Description": "World y assigned to every emitted position (x and z unchanged)."
+      }
+    }
+  ],
+  "Outputs": [
+    {
+      "Id": "PositionsConnection",
+      "Type": "PositionsConnection",
+      "Color": "Blue",
+      "Multiple": false,
+      "Label": "Positions",
+      "Description": "Child positions (e.g. SquareGrid2d, List)."
+    }
+  ],
+  "Inputs": [
+    {
+      "Id": "Output",
+      "Type": "PositionsConnection",
+      "Color": "Blue"
+    }
+  ],
+  "Schema": {
+    "Type": "YOverridePositions",
+    "ExportAs": "ExportAs",
+    "Skip": "Skip",
+    "Value": "Value",
+    "Positions": {
+      "Node": "PositionsVariants",
+      "Pin": "PositionsConnection"
+    }
+  }
+}

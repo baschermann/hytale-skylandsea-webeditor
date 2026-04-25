@@ -1,0 +1,635 @@
+{
+	"WaterTint": "#5a9ec4",
+	"SpawnDensity": 0.85,
+	"Tags": {
+		"Skylandsea":[
+			"Center"
+		]
+	},
+	"WeatherForecasts": {
+		"0": [
+			{
+				"WeatherId": "Skylands_Sunny",
+				"Weight": 28
+			},
+			{
+				"WeatherId": "Skylands_Light",
+				"Weight": 22
+			},
+			{
+				"WeatherId": "Skylands_Mystic_Forest_Cloudy",
+				"Weight": 18
+			},
+			{
+				"WeatherId": "Skylands_Mushroom_Forest_Cloudy",
+				"Weight": 15
+			},
+			{
+				"WeatherId": "Skylands_Rapid_Marsh_Cloudy_Medium",
+				"Weight": 12
+			},
+			{
+				"WeatherId": "Skylands_Rapid_Marsh_Stormy",
+				"Weight": 5
+			}
+		],
+		"1": [
+			{
+				"WeatherId": "Skylands_Sunny",
+				"Weight": 28
+			},
+			{
+				"WeatherId": "Skylands_Light",
+				"Weight": 22
+			},
+			{
+				"WeatherId": "Skylands_Mystic_Forest_Cloudy",
+				"Weight": 18
+			},
+			{
+				"WeatherId": "Skylands_Mushroom_Forest_Cloudy",
+				"Weight": 15
+			},
+			{
+				"WeatherId": "Skylands_Rapid_Marsh_Cloudy_Medium",
+				"Weight": 12
+			},
+			{
+				"WeatherId": "Skylands_Rapid_Marsh_Stormy",
+				"Weight": 5
+			}
+		],
+		"2": [
+			{
+				"WeatherId": "Skylands_Sunny",
+				"Weight": 28
+			},
+			{
+				"WeatherId": "Skylands_Light",
+				"Weight": 22
+			},
+			{
+				"WeatherId": "Skylands_Mystic_Forest_Cloudy",
+				"Weight": 18
+			},
+			{
+				"WeatherId": "Skylands_Mushroom_Forest_Cloudy",
+				"Weight": 15
+			},
+			{
+				"WeatherId": "Skylands_Rapid_Marsh_Cloudy_Medium",
+				"Weight": 12
+			},
+			{
+				"WeatherId": "Skylands_Rapid_Marsh_Stormy",
+				"Weight": 5
+			}
+		],
+		"3": [
+			{
+				"WeatherId": "Skylands_Sunny",
+				"Weight": 28
+			},
+			{
+				"WeatherId": "Skylands_Light",
+				"Weight": 22
+			},
+			{
+				"WeatherId": "Skylands_Mystic_Forest_Cloudy",
+				"Weight": 18
+			},
+			{
+				"WeatherId": "Skylands_Mushroom_Forest_Cloudy",
+				"Weight": 15
+			},
+			{
+				"WeatherId": "Skylands_Rapid_Marsh_Cloudy_Medium",
+				"Weight": 12
+			},
+			{
+				"WeatherId": "Skylands_Rapid_Marsh_Stormy",
+				"Weight": 5
+			}
+		],
+		"4": [
+			{
+				"WeatherId": "Skylands_Sunny",
+				"Weight": 28
+			},
+			{
+				"WeatherId": "Skylands_Light",
+				"Weight": 22
+			},
+			{
+				"WeatherId": "Skylands_Mystic_Forest_Cloudy",
+				"Weight": 18
+			},
+			{
+				"WeatherId": "Skylands_Mushroom_Forest_Cloudy",
+				"Weight": 15
+			},
+			{
+				"WeatherId": "Skylands_Rapid_Marsh_Cloudy_Medium",
+				"Weight": 12
+			},
+			{
+				"WeatherId": "Skylands_Rapid_Marsh_Stormy",
+				"Weight": 5
+			}
+		],
+		"5": [
+			{
+				"WeatherId": "Skylands_Sunny",
+				"Weight": 28
+			},
+			{
+				"WeatherId": "Skylands_Light",
+				"Weight": 22
+			},
+			{
+				"WeatherId": "Skylands_Mystic_Forest_Cloudy",
+				"Weight": 18
+			},
+			{
+				"WeatherId": "Skylands_Mushroom_Forest_Cloudy",
+				"Weight": 15
+			},
+			{
+				"WeatherId": "Skylands_Rapid_Marsh_Cloudy_Medium",
+				"Weight": 12
+			},
+			{
+				"WeatherId": "Skylands_Rapid_Marsh_Stormy",
+				"Weight": 5
+			}
+		],
+		"6": [
+			{
+				"WeatherId": "Skylands_Sunny",
+				"Weight": 28
+			},
+			{
+				"WeatherId": "Skylands_Light",
+				"Weight": 22
+			},
+			{
+				"WeatherId": "Skylands_Mystic_Forest_Cloudy",
+				"Weight": 18
+			},
+			{
+				"WeatherId": "Skylands_Mushroom_Forest_Cloudy",
+				"Weight": 15
+			},
+			{
+				"WeatherId": "Skylands_Rapid_Marsh_Cloudy_Medium",
+				"Weight": 12
+			},
+			{
+				"WeatherId": "Skylands_Rapid_Marsh_Stormy",
+				"Weight": 5
+			}
+		],
+		"7": [
+			{
+				"WeatherId": "Skylands_Sunny",
+				"Weight": 28
+			},
+			{
+				"WeatherId": "Skylands_Light",
+				"Weight": 22
+			},
+			{
+				"WeatherId": "Skylands_Mystic_Forest_Cloudy",
+				"Weight": 18
+			},
+			{
+				"WeatherId": "Skylands_Mushroom_Forest_Cloudy",
+				"Weight": 15
+			},
+			{
+				"WeatherId": "Skylands_Rapid_Marsh_Cloudy_Medium",
+				"Weight": 12
+			},
+			{
+				"WeatherId": "Skylands_Rapid_Marsh_Stormy",
+				"Weight": 5
+			}
+		],
+		"8": [
+			{
+				"WeatherId": "Skylands_Sunny",
+				"Weight": 28
+			},
+			{
+				"WeatherId": "Skylands_Light",
+				"Weight": 22
+			},
+			{
+				"WeatherId": "Skylands_Mystic_Forest_Cloudy",
+				"Weight": 18
+			},
+			{
+				"WeatherId": "Skylands_Mushroom_Forest_Cloudy",
+				"Weight": 15
+			},
+			{
+				"WeatherId": "Skylands_Rapid_Marsh_Cloudy_Medium",
+				"Weight": 12
+			},
+			{
+				"WeatherId": "Skylands_Rapid_Marsh_Stormy",
+				"Weight": 5
+			}
+		],
+		"9": [
+			{
+				"WeatherId": "Skylands_Sunny",
+				"Weight": 28
+			},
+			{
+				"WeatherId": "Skylands_Light",
+				"Weight": 22
+			},
+			{
+				"WeatherId": "Skylands_Mystic_Forest_Cloudy",
+				"Weight": 18
+			},
+			{
+				"WeatherId": "Skylands_Mushroom_Forest_Cloudy",
+				"Weight": 15
+			},
+			{
+				"WeatherId": "Skylands_Rapid_Marsh_Cloudy_Medium",
+				"Weight": 12
+			},
+			{
+				"WeatherId": "Skylands_Rapid_Marsh_Stormy",
+				"Weight": 5
+			}
+		],
+		"10": [
+			{
+				"WeatherId": "Skylands_Sunny",
+				"Weight": 28
+			},
+			{
+				"WeatherId": "Skylands_Light",
+				"Weight": 22
+			},
+			{
+				"WeatherId": "Skylands_Mystic_Forest_Cloudy",
+				"Weight": 18
+			},
+			{
+				"WeatherId": "Skylands_Mushroom_Forest_Cloudy",
+				"Weight": 15
+			},
+			{
+				"WeatherId": "Skylands_Rapid_Marsh_Cloudy_Medium",
+				"Weight": 12
+			},
+			{
+				"WeatherId": "Skylands_Rapid_Marsh_Stormy",
+				"Weight": 5
+			}
+		],
+		"11": [
+			{
+				"WeatherId": "Skylands_Sunny",
+				"Weight": 28
+			},
+			{
+				"WeatherId": "Skylands_Light",
+				"Weight": 22
+			},
+			{
+				"WeatherId": "Skylands_Mystic_Forest_Cloudy",
+				"Weight": 18
+			},
+			{
+				"WeatherId": "Skylands_Mushroom_Forest_Cloudy",
+				"Weight": 15
+			},
+			{
+				"WeatherId": "Skylands_Rapid_Marsh_Cloudy_Medium",
+				"Weight": 12
+			},
+			{
+				"WeatherId": "Skylands_Rapid_Marsh_Stormy",
+				"Weight": 5
+			}
+		],
+		"12": [
+			{
+				"WeatherId": "Skylands_Sunny",
+				"Weight": 28
+			},
+			{
+				"WeatherId": "Skylands_Light",
+				"Weight": 22
+			},
+			{
+				"WeatherId": "Skylands_Mystic_Forest_Cloudy",
+				"Weight": 18
+			},
+			{
+				"WeatherId": "Skylands_Mushroom_Forest_Cloudy",
+				"Weight": 15
+			},
+			{
+				"WeatherId": "Skylands_Rapid_Marsh_Cloudy_Medium",
+				"Weight": 12
+			},
+			{
+				"WeatherId": "Skylands_Rapid_Marsh_Stormy",
+				"Weight": 5
+			}
+		],
+		"13": [
+			{
+				"WeatherId": "Skylands_Sunny",
+				"Weight": 28
+			},
+			{
+				"WeatherId": "Skylands_Light",
+				"Weight": 22
+			},
+			{
+				"WeatherId": "Skylands_Mystic_Forest_Cloudy",
+				"Weight": 18
+			},
+			{
+				"WeatherId": "Skylands_Mushroom_Forest_Cloudy",
+				"Weight": 15
+			},
+			{
+				"WeatherId": "Skylands_Rapid_Marsh_Cloudy_Medium",
+				"Weight": 12
+			},
+			{
+				"WeatherId": "Skylands_Rapid_Marsh_Stormy",
+				"Weight": 5
+			}
+		],
+		"14": [
+			{
+				"WeatherId": "Skylands_Sunny",
+				"Weight": 28
+			},
+			{
+				"WeatherId": "Skylands_Light",
+				"Weight": 22
+			},
+			{
+				"WeatherId": "Skylands_Mystic_Forest_Cloudy",
+				"Weight": 18
+			},
+			{
+				"WeatherId": "Skylands_Mushroom_Forest_Cloudy",
+				"Weight": 15
+			},
+			{
+				"WeatherId": "Skylands_Rapid_Marsh_Cloudy_Medium",
+				"Weight": 12
+			},
+			{
+				"WeatherId": "Skylands_Rapid_Marsh_Stormy",
+				"Weight": 5
+			}
+		],
+		"15": [
+			{
+				"WeatherId": "Skylands_Sunny",
+				"Weight": 28
+			},
+			{
+				"WeatherId": "Skylands_Light",
+				"Weight": 22
+			},
+			{
+				"WeatherId": "Skylands_Mystic_Forest_Cloudy",
+				"Weight": 18
+			},
+			{
+				"WeatherId": "Skylands_Mushroom_Forest_Cloudy",
+				"Weight": 15
+			},
+			{
+				"WeatherId": "Skylands_Rapid_Marsh_Cloudy_Medium",
+				"Weight": 12
+			},
+			{
+				"WeatherId": "Skylands_Rapid_Marsh_Stormy",
+				"Weight": 5
+			}
+		],
+		"16": [
+			{
+				"WeatherId": "Skylands_Sunny",
+				"Weight": 28
+			},
+			{
+				"WeatherId": "Skylands_Light",
+				"Weight": 22
+			},
+			{
+				"WeatherId": "Skylands_Mystic_Forest_Cloudy",
+				"Weight": 18
+			},
+			{
+				"WeatherId": "Skylands_Mushroom_Forest_Cloudy",
+				"Weight": 15
+			},
+			{
+				"WeatherId": "Skylands_Rapid_Marsh_Cloudy_Medium",
+				"Weight": 12
+			},
+			{
+				"WeatherId": "Skylands_Rapid_Marsh_Stormy",
+				"Weight": 5
+			}
+		],
+		"17": [
+			{
+				"WeatherId": "Skylands_Sunny",
+				"Weight": 28
+			},
+			{
+				"WeatherId": "Skylands_Light",
+				"Weight": 22
+			},
+			{
+				"WeatherId": "Skylands_Mystic_Forest_Cloudy",
+				"Weight": 18
+			},
+			{
+				"WeatherId": "Skylands_Mushroom_Forest_Cloudy",
+				"Weight": 15
+			},
+			{
+				"WeatherId": "Skylands_Rapid_Marsh_Cloudy_Medium",
+				"Weight": 12
+			},
+			{
+				"WeatherId": "Skylands_Rapid_Marsh_Stormy",
+				"Weight": 5
+			}
+		],
+		"18": [
+			{
+				"WeatherId": "Skylands_Sunny",
+				"Weight": 28
+			},
+			{
+				"WeatherId": "Skylands_Light",
+				"Weight": 22
+			},
+			{
+				"WeatherId": "Skylands_Mystic_Forest_Cloudy",
+				"Weight": 18
+			},
+			{
+				"WeatherId": "Skylands_Mushroom_Forest_Cloudy",
+				"Weight": 15
+			},
+			{
+				"WeatherId": "Skylands_Rapid_Marsh_Cloudy_Medium",
+				"Weight": 12
+			},
+			{
+				"WeatherId": "Skylands_Rapid_Marsh_Stormy",
+				"Weight": 5
+			}
+		],
+		"19": [
+			{
+				"WeatherId": "Skylands_Sunny",
+				"Weight": 28
+			},
+			{
+				"WeatherId": "Skylands_Light",
+				"Weight": 22
+			},
+			{
+				"WeatherId": "Skylands_Mystic_Forest_Cloudy",
+				"Weight": 18
+			},
+			{
+				"WeatherId": "Skylands_Mushroom_Forest_Cloudy",
+				"Weight": 15
+			},
+			{
+				"WeatherId": "Skylands_Rapid_Marsh_Cloudy_Medium",
+				"Weight": 12
+			},
+			{
+				"WeatherId": "Skylands_Rapid_Marsh_Stormy",
+				"Weight": 5
+			}
+		],
+		"20": [
+			{
+				"WeatherId": "Skylands_Sunny",
+				"Weight": 28
+			},
+			{
+				"WeatherId": "Skylands_Light",
+				"Weight": 22
+			},
+			{
+				"WeatherId": "Skylands_Mystic_Forest_Cloudy",
+				"Weight": 18
+			},
+			{
+				"WeatherId": "Skylands_Mushroom_Forest_Cloudy",
+				"Weight": 15
+			},
+			{
+				"WeatherId": "Skylands_Rapid_Marsh_Cloudy_Medium",
+				"Weight": 12
+			},
+			{
+				"WeatherId": "Skylands_Rapid_Marsh_Stormy",
+				"Weight": 5
+			}
+		],
+		"21": [
+			{
+				"WeatherId": "Skylands_Sunny",
+				"Weight": 28
+			},
+			{
+				"WeatherId": "Skylands_Light",
+				"Weight": 22
+			},
+			{
+				"WeatherId": "Skylands_Mystic_Forest_Cloudy",
+				"Weight": 18
+			},
+			{
+				"WeatherId": "Skylands_Mushroom_Forest_Cloudy",
+				"Weight": 15
+			},
+			{
+				"WeatherId": "Skylands_Rapid_Marsh_Cloudy_Medium",
+				"Weight": 12
+			},
+			{
+				"WeatherId": "Skylands_Rapid_Marsh_Stormy",
+				"Weight": 5
+			}
+		],
+		"22": [
+			{
+				"WeatherId": "Skylands_Sunny",
+				"Weight": 28
+			},
+			{
+				"WeatherId": "Skylands_Light",
+				"Weight": 22
+			},
+			{
+				"WeatherId": "Skylands_Mystic_Forest_Cloudy",
+				"Weight": 18
+			},
+			{
+				"WeatherId": "Skylands_Mushroom_Forest_Cloudy",
+				"Weight": 15
+			},
+			{
+				"WeatherId": "Skylands_Rapid_Marsh_Cloudy_Medium",
+				"Weight": 12
+			},
+			{
+				"WeatherId": "Skylands_Rapid_Marsh_Stormy",
+				"Weight": 5
+			}
+		],
+		"23": [
+			{
+				"WeatherId": "Skylands_Sunny",
+				"Weight": 28
+			},
+			{
+				"WeatherId": "Skylands_Light",
+				"Weight": 22
+			},
+			{
+				"WeatherId": "Skylands_Mystic_Forest_Cloudy",
+				"Weight": 18
+			},
+			{
+				"WeatherId": "Skylands_Mushroom_Forest_Cloudy",
+				"Weight": 15
+			},
+			{
+				"WeatherId": "Skylands_Rapid_Marsh_Cloudy_Medium",
+				"Weight": 12
+			},
+			{
+				"WeatherId": "Skylands_Rapid_Marsh_Stormy",
+				"Weight": 5
+			}
+		]
+	}
+}

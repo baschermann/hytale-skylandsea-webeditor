@@ -1,0 +1,52 @@
+{
+  "Id": "DistanceExponentialCurve",
+  "Title": "DistanceExponential Curve",
+  "Color": "Orange",
+  "Description" : "The DistanceExponential Curve has the following shape depending on the Exponent value. As this curve’s input approaches the Range value, it outputs 0.0. At an input of 0.0, this curve outputs 1.0.",
+  "Content" : [
+    {
+      "Id" : "ExportAs",
+      "Type" : "SmallString",
+      "Options" : {
+        "Label" : "ExportAs",
+        "Default" : "",
+        "Width" : 250
+      }
+    },
+    {
+      "Id": "Exponent",
+      "Type": "Float",
+      "Options": {
+        "Label": "Exponent",
+        "Default" : 1,
+        "Width" : 100,
+        "Description" : "Affects the curve’s shape like in the diagram above."
+      }
+    },
+    {
+      "Id": "Range",
+      "Type": "Float",
+      "Options": {
+        "Label": "Range",
+        "Default" : 10,
+        "Width" : 100,
+        "Description" : "The value after which the curve outputs a constant 0.0."
+      }
+    }
+  ],
+  "Outputs": [
+  ],
+  "Inputs": [
+    {
+      "Id": "Input",
+      "Type": "CurveConnection",
+      "Color": "Orange"
+    }
+  ],
+  "Schema": {
+    "Type" : "DistanceExponential",
+    "ExportAs" : "ExportAs",
+    "Exponent" : "Exponent",
+    "Range" : "Range"
+  }
+}

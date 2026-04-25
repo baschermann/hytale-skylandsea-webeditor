@@ -1,0 +1,31 @@
+{
+  "Id": "ImportedMaterialProvider",
+  "Title": "Imported MaterialProvider",
+  "Color": "110,63,16",
+  "Description" : "Imports an exported Material Provider.",
+  "Content": [
+    {
+      "Id" : "Name",
+      "Type" : "SmallString",
+      "Options" : {
+        "Label" : "Name",
+        "Default" : "",
+        "Width" : 250,
+        "Description" : "The exported Material Provider."
+      }
+    }
+  ],
+  "Outputs": [
+  ],
+  "Inputs": [
+    {
+      "Id": "OutputPin",
+      "Type": "MaterialProviderConnection",
+      "Color": "110,63,16"
+    }
+  ],
+  "Schema": {
+    "Type" : "Imported",
+    "Name" : "Name"
+  }
+}

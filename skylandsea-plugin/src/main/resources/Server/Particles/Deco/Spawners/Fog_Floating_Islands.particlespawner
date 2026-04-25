@@ -1,0 +1,123 @@
+{
+  "RenderMode": "BlendLinear",
+  "EmitOffset": {
+    "X": {
+      "Min": 30,
+      "Max": 45
+    },
+    "Y": {
+      "Min": -25,
+      "Max": 25
+    },
+    "Z": {
+      "Min": 30,
+      "Max": 45
+    }
+  },
+  "ParticleRotationInfluence": "Billboard",
+  "LinearFiltering": true,
+  "LightInfluence": 1,
+  "ParticleRotateWithSpawner": false,
+  "TrailSpawnerPositionMultiplier": 1,
+  "TrailSpawnerRotationMultiplier": 1,
+  "MaxConcurrentParticles": 250,
+  "ParticleLifeSpan": {
+    "Min": 5,
+    "Max": 20
+  },
+  "SpawnRate": {
+    "Min": 25,
+    "Max": 50
+  },
+  "InitialVelocity": {
+    "Speed": {
+      "Min": -0.015,
+      "Max": 0.015
+    },
+    "Yaw": {
+      "Min": 0,
+      "Max": 360
+    },
+    "Pitch": {
+      "Min": 0,
+      "Max": 360
+    }
+  },
+  "Attractors": [
+    {
+      "Radius": 0,
+      "RadialAcceleration": 0,
+      "RadialTangentAcceleration": 0,
+      "LinearAcceleration": {
+        "X": 0.0,
+        "Y": 0,
+        "Z": 0
+      }
+    }
+  ],
+  "Particle": {
+    "Texture": "Particles/Skylands/Mushroom_Base_Small.png",
+    "FrameSize": {
+      "Width": 64,
+      "Height": 64
+    },
+    "ScaleRatioConstraint": "OneToOne",
+    "UVOption": "RandomFlipU",
+    "Animation": {
+      "0": {
+        "Scale": {
+          "X": {
+            "Min": 1,
+            "Max": 1
+          },
+          "Y": {
+            "Min": 1,
+            "Max": 1
+          }
+        },
+        "Opacity": 0
+      },
+      "20": {
+        "Opacity": 1
+      },
+      "40": {
+        "Opacity": 1
+      },
+      "80": {
+        "Opacity": 1,
+        "Scale": {
+          "X": {
+            "Min": 1,
+            "Max": 1
+          },
+          "Y": {
+            "Min": 1,
+            "Max": 1
+          }
+        }
+      },
+      "100": {
+        "Opacity": 0
+      }
+    },
+    "InitialAnimationFrame": {
+      "Color": "#ffffff",
+      "Scale": {
+        "X": {
+          "Min": 8,
+          "Max": 16
+        },
+        "Y": {
+          "Min": 8,
+          "Max": 16
+        }
+      },
+      "Opacity": 0.1
+    }
+  },
+  "ParticleCollision": {
+    "ParticleRotationInfluence": "Velocity",
+    "BlockType": "None"
+  },
+  "UseEmitDirection": false
+}

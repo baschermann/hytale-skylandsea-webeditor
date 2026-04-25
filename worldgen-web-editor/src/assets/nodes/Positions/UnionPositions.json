@@ -1,0 +1,54 @@
+{
+  "Id": "UnionPositions",
+  "Title": "Union Positions",
+  "Color": "Blue",
+  "Description" : "Combines all positions into a single Positions field.",
+  "Content" : [
+    {
+      "Id" : "ExportAs",
+      "Type" : "SmallString",
+      "Options" : {
+        "Label" : "ExportAs",
+        "Default" : "",
+        "Width" : 250
+      }
+    },
+    {
+      "Id": "Skip",
+      "Type": "Checkbox",
+      "Options": {
+        "Label": "Skip",
+        "Default" : false
+      }
+    }
+  ],
+  "Outputs": [
+    {
+      "Id": "PositionsConnection",
+      "Type": "PositionsConnection",
+      "Color": "Blue",
+      "Multiple" : true,
+      "Label" : "Positions",
+      "Description" : "Inputs."
+    }
+  ],
+  "Inputs": [
+    {
+      "Id": "Output",
+      "Type": "PositionsConnection",
+      "Color": "Blue"
+    }
+  ],
+  "Schema": {
+    "Type" : "Union",
+    "ExportAs" : "ExportAs",
+    "Skip" : "Skip",
+    "OffsetX" : "OffsetX",
+    "OffsetY" : "OffsetY",
+    "OffsetZ" : "OffsetZ",
+    "Positions" : {
+      "Node" : "PositionsVariants",
+      "Pin" : "PositionsConnection"
+    }
+  }
+}

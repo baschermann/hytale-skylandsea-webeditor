@@ -1,0 +1,31 @@
+{
+  "Id": "Imported.VectorProvider",
+  "Title": "Imported VectorProvider",
+  "Color": "Green",
+  "Description" : "Imports an exported VectorProvider.",
+  "Content": [
+    {
+      "Id" : "Name",
+      "Type" : "SmallString",
+      "Options" : {
+        "Label" : "Name",
+        "Default" : "",
+        "Width" : 350,
+        "Description" : "The exported VectorProvider."
+      }
+    }
+  ],
+  "Outputs": [
+  ],
+  "Inputs": [
+    {
+      "Id": "Output",
+      "Type": "VectorProvider.Connection",
+      "Color": "Green"
+    }
+  ],
+  "Schema": {
+    "Type" : "Imported",
+    "Name" : "Name"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "Id": "Cache.VectorProvider",
+  "Title": "Cache VectorProvider",
+  "Color": "Green",
+  "Description" : "Caches the input vector for each position.\nUse this only if the downstream (child) VectorProvider is expensive and the same coordinate is queried more than once.",
+  "Content": [
+    {
+      "Id" : "ExportAs",
+      "Type" : "SmallString",
+      "Options" : {
+        "Label" : "ExportAs",
+        "Default" : "",
+        "Width" : 250
+      }
+    }
+  ],
+  "Outputs": [
+    {
+      "Id": "VectorProvider",
+      "Type": "VectorProvider.Connection",
+      "Color": "Green",
+      "Label" : "VectorProvider"
+    }
+  ],
+  "Inputs": [
+    {
+      "Id": "Output",
+      "Type": "VectorProvider.Connection",
+      "Color": "Green"
+    }
+  ],
+  "Schema": {
+    "Type" : "Cache",
+    "ExportAs" : "ExportAs",
+    "VectorProvider" : {
+      "Node" : "VectorProvider.Variants",
+      "Pin" : "VectorProvider"
+    }
+  }
+}

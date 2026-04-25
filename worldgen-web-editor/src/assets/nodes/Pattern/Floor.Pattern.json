@@ -1,0 +1,61 @@
+{
+  "Id": "Floor.Pattern",
+  "Title": "Floor Pattern",
+  "Color": "Pink",
+  "Description" : "Checks if there is a floor below the position. The Origin validates the position and the Floor validates right under the position. For a simple Floor configuration, use BlockType or BlockSet Patterns in those slots.",
+  "Content" : [
+    {
+      "Id" : "ExportAs",
+      "Type" : "SmallString",
+      "Options" : {
+        "Label" : "ExportAs",
+        "Default" : "",
+        "Width" : 250
+      }
+    },
+    {
+      "Id": "Skip",
+      "Type": "Checkbox",
+      "Options": {
+        "Label": "Skip",
+        "Default" : false
+      }
+    }
+  ],
+  "Outputs": [
+    {
+      "Id": "Origin",
+      "Type": "Pattern.Connection",
+      "Color": "Pink",
+      "Label" : "Origin",
+      "Description" : "Validates the block at the Origin position."
+    },
+    {
+      "Id": "Floor",
+      "Type": "Pattern.Connection",
+      "Color": "Pink",
+      "Label" : "Floor",
+      "Description" : "Validates the block under the Origin position."
+    }
+  ],
+  "Inputs": [
+    {
+      "Id": "Output",
+      "Type": "Pattern.Connection",
+      "Color": "Pink"
+    }
+  ],
+  "Schema": {
+    "Type" : "Floor",
+    "ExportAs" : "ExportAs",
+    "Skip" : "Skip",
+    "Origin" : {
+      "Node" : "Pattern.Variants",
+      "Pin" : "Origin"
+    },
+    "Floor" : {
+      "Node" : "Pattern.Variants",
+      "Pin" : "Floor"
+    }
+  }
+}

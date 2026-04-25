@@ -1,0 +1,61 @@
+{
+  "Id": "Anchor.Density",
+  "Title": "Anchor Density",
+  "Color": "Purple",
+  "Description" : "Anchors the origin of the child field (input) to the contextual Anchor if it exists. It basically puts the {0, 0, 0} origin of the child Density at the position of the Anchor.\nFor a contextual Anchor to exist, a parent of this node must produce an Anchor. The Density ReturnType node, for example, leaves the cell's center as a contextual Anchor in its Density child’s context.\nYou can also reverse the effect later down the line to move the origin back to the world’s origin like in the screenshot below. The field is unanchored when it reaches the bottom branch of the Sum, but the top branch is still anchored.",
+  "Content": [
+    {
+      "Id" : "ExportAs",
+      "Type" : "SmallString",
+      "Options" : {
+        "Label" : "ExportAs",
+        "Default" : "",
+        "Width" : 250
+      }
+    },
+    {
+      "Id": "Skip",
+      "Type": "Checkbox",
+      "Options": {
+        "Label": "Skip",
+        "Default" : false
+      }
+    },
+    {
+      "Id": "Reversed",
+      "Type": "Checkbox",
+      "Options": {
+        "Label": "Reversed",
+        "Default" : false,
+        "Description" : "If true, the node will reverse the origin of the child to the world’s origin, or the origin before the previous Anchor node."
+      }
+    }
+  ],
+  "Outputs": [
+    {
+      "Id": "DensityInputs",
+      "Type": "DensityConnection",
+      "Color": "Purple",
+      "Multiple" : true,
+      "Label" : "Inputs",
+      "Description" : "0: Input."
+    }
+  ],
+  "Inputs": [
+    {
+      "Id": "DensityOutput",
+      "Type": "DensityConnection",
+      "Color": "Purple"
+    }
+  ],
+  "Schema": {
+    "Type" : "Anchor",
+    "ExportAs" : "ExportAs",
+    "Skip" : "Skip",
+    "Reversed" : "Reversed",
+    "Inputs" : {
+      "Node" : "DensityNodeVariants",
+      "Pin" : "DensityInputs"
+    }
+  }
+}

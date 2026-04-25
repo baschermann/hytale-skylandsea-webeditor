@@ -1,0 +1,40 @@
+{
+  "Id": "Rule.BlockMask",
+  "Title": "Rule BlockMask",
+  "Color": "Orange",
+  "Content" : [
+  ],
+  "Outputs": [
+    {
+      "Id": "Source",
+      "Type": "BlockSet.BlockMask.Connection",
+      "Color": "Yellow",
+      "Label" : "Source",
+      "Description" : "The Source Materials the rule applies to."
+    },
+    {
+      "Id": "CanReplace",
+      "Type": "BlockSet.BlockMask.Connection",
+      "Color": "Yellow",
+      "Label" : "CanReplace",
+      "Description" : "The Destination Materials those sources can replace."
+    }
+  ],
+  "Inputs": [
+    {
+      "Id": "Output",
+      "Type": "Rule.BlockMask.Connection",
+      "Color": "Orange"
+    }
+  ],
+  "Schema": {
+    "Source" : {
+      "Node" : "BlockSet.BlockMask",
+      "Pin" : "Source"
+    },
+    "CanReplace" : {
+      "Node" : "BlockSet.BlockMask",
+      "Pin" : "CanReplace"
+    }
+  }
+}

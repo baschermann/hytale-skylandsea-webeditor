@@ -1,0 +1,127 @@
+{
+  "Id": "DeterministicRandomPositions.Positions",
+  "Title": "Deterministic Random Positions",
+  "Color": "Blue",
+  "Content": [
+    {
+      "Id": "ExportAs",
+      "Type": "SmallString",
+      "Options": {
+        "Label": "ExportAs",
+        "Default": "",
+        "Width": 250
+      }
+    },
+    {
+      "Id": "Skip",
+      "Type": "Checkbox",
+      "Options": {
+        "Label": "Skip",
+        "Default": false
+      }
+    },
+    {
+      "Id": "RepeatX",
+      "Type": "Int",
+      "Options": {
+        "Label": "Repeat X (blocks)",
+        "Default": 32,
+        "Width": 100
+      }
+    },
+    {
+      "Id": "RepeatZ",
+      "Type": "Int",
+      "Options": {
+        "Label": "Repeat Z (blocks)",
+        "Default": 32,
+        "Width": 100
+      }
+    },
+    {
+      "Id": "BaseY",
+      "Type": "Int",
+      "Options": {
+        "Label": "Base Y (voxel)",
+        "Default": 64,
+        "Width": 100
+      }
+    },
+    {
+      "Id": "OriginX",
+      "Type": "Int",
+      "Options": {
+        "Label": "Origin X",
+        "Default": 0,
+        "Width": 100
+      }
+    },
+    {
+      "Id": "OriginZ",
+      "Type": "Int",
+      "Options": {
+        "Label": "Origin Z",
+        "Default": 0,
+        "Width": 100
+      }
+    },
+    {
+      "Id": "JitterX",
+      "Type": "Float",
+      "Options": {
+        "Label": "Jitter X (mesh-style scale)",
+        "Default": 0.4,
+        "Width": 100
+      }
+    },
+    {
+      "Id": "JitterY",
+      "Type": "Float",
+      "Options": {
+        "Label": "Jitter Y (mesh-style scale)",
+        "Default": 0,
+        "Width": 100
+      }
+    },
+    {
+      "Id": "JitterZ",
+      "Type": "Float",
+      "Options": {
+        "Label": "Jitter Z (mesh-style scale)",
+        "Default": 0.4,
+        "Width": 100
+      }
+    },
+    {
+      "Id": "Seed",
+      "Type": "SmallString",
+      "Options": {
+        "Label": "Seed",
+        "Default": "A",
+        "Width": 100
+      }
+    }
+  ],
+  "Outputs": [],
+  "Inputs": [
+    {
+      "Id": "Output",
+      "Type": "PositionsConnection",
+      "Color": "Blue"
+    }
+  ],
+  "Schema": {
+    "Type": "DeterministicRandomPositions",
+    "ExportAs": "ExportAs",
+    "Skip": "Skip",
+    "RepeatX": "RepeatX",
+    "RepeatZ": "RepeatZ",
+    "BaseY": "BaseY",
+    "OriginX": "OriginX",
+    "OriginZ": "OriginZ",
+    "JitterX": "JitterX",
+    "JitterY": "JitterY",
+    "JitterZ": "JitterZ",
+    "Seed": "Seed"
+  }
+}

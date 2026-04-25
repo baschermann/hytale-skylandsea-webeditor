@@ -1,0 +1,73 @@
+{
+  "Id": "OccurrencePositions",
+  "Title": "Occurrence Positions",
+  "Color": "Blue",
+  "Description" : "Discards a percentage of input positions based on a Density field. The value of the Density field at each position determines the chance that the position is kept.\n- Positions where the Density value is less than or equal to 0.0 have a 0% chance of being kept.\n- Positions where the Density value is greater than or equal to 1.0 have a 100% chance of being kept.\n- Positions where the Density value is between 0.0 and 1.0 have a proportional percentage chance of being kept. Example: 0.4 → 40%.",
+  "Content" : [
+    {
+      "Id" : "ExportAs",
+      "Type" : "SmallString",
+      "Options" : {
+        "Label" : "ExportAs",
+        "Default" : "",
+        "Width" : 250
+      }
+    },
+    {
+      "Id": "Skip",
+      "Type": "Checkbox",
+      "Options": {
+        "Label": "Skip",
+        "Default" : false
+      }
+    },
+    {
+      "Id" : "Seed",
+      "Type" : "SmallString",
+      "Options" : {
+        "Label" : "Seed",
+        "Default" : "A",
+        "Width" : 100
+      }
+    }
+  ],
+  "Outputs": [
+    {
+      "Id": "PositionsConnection",
+      "Type": "PositionsConnection",
+      "Color": "Blue",
+      "Multiple" : false,
+      "Label" : "Positions",
+      "Description" : "Input."
+    },
+    {
+      "Id": "DensityConnection",
+      "Type": "DensityConnection",
+      "Color": "Purple",
+      "Multiple" : false,
+      "Label" : "FieldFunction",
+      "Description" : "Determines the chance of keeping the positions."
+    }
+  ],
+  "Inputs": [
+    {
+      "Id": "Output",
+      "Type": "PositionsConnection",
+      "Color": "Blue"
+    }
+  ],
+  "Schema": {
+    "Type" : "Occurrence",
+    "ExportAs" : "ExportAs",
+    "Skip" : "Skip",
+    "Seed" : "Seed",
+    "FieldFunction" : {
+      "Node" : "DensityNodeVariants",
+      "Pin" : "DensityConnection"
+    },
+    "Positions" : {
+      "Node" : "PositionsVariants",
+      "Pin" : "PositionsConnection"
+    }
+  }
+}

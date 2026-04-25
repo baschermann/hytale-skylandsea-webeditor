@@ -1,0 +1,28 @@
+{
+  "Environments": [
+    "Env_Skylandsea"
+  ],
+  "NPCs": [
+    {
+      "Weight": 12,
+      "SpawnBlockSet": "Soil",
+      "Id": "Tetrabird",
+      "Flock": "Group_Tiny"
+    },
+    {
+      "Weight": 15,
+      "SpawnBlockSet": "Soil",
+      "Id": "Sheep",
+      "Flock": "Group_Small"
+    },
+    {
+      "Weight": 5,
+      "SpawnBlockSet": "Soil",
+      "Id": "Fox"
+    }
+  ],
+  "DayTimeRange": [
+    0,
+    23
+  ]
+}

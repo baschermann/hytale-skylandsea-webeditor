@@ -1,0 +1,239 @@
+plugins {
+    id 'java'
+    id 'org.jetbrains.gradle.plugin.idea-ext' version '1.3'
+}
+
+import groovy.json.JsonOutput
+import groovy.json.JsonSlurper
+import org.codehaus.groovy.runtime.GStringImpl
+import org.gradle.api.file.DuplicatesStrategy
+import org.gradle.internal.os.OperatingSystem
+
+def npmExecutable() {
+    OperatingSystem.current().isWindows() ? 'npm.cmd' : 'npm'
+}
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    if (project.hasProperty('hytale_home')) {
+        hytaleHome = project.findProperty('hytale_home') as GStringImpl
+    } else {
+        def os = OperatingSystem.current()
+        if (os.isWindows()) {
+            hytaleHome = "${System.getProperty("user.home")}/AppData/Roaming/Hytale"
+        } else if (os.isMacOsX()) {
+            hytaleHome = "${System.getProperty("user.home")}/Library/Application Support/Hytale"
+        } else if (os.isLinux()) {
+            hytaleHome = "${System.getProperty("user.home")}/.var/app/com.hypixel.HytaleLauncher/data/Hytale"
+            if (!file(hytaleHome).exists()) {
+                hytaleHome = "${System.getProperty("user.home")}/.local/share/Hytale"
+            }
+        }
+    }
+}
+
+if (!project.hasProperty('hytaleHome')) {
+    throw new GradleException('Your Hytale install could not be detected automatically. If you are on an unsupported platform or using a custom install location, please define the install location using the hytale_home property.')
+} else if (!file(project.findProperty('hytaleHome')).exists()) {
+    throw new GradleException("Failed to find Hytale at the expected location. Please make sure you have installed the game. The expected location can be changed using the hytale_home property. Currently looking in ${project.findProperty('hytaleHome')}")
+}
+
+base {
+    archivesName = 'worldgen-web-editor-plugin'
+}
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(java_version)
+}
+
+def vueAppDir = file("${rootDir}/../worldgen-web-editor")
+def vueResourcesStaging = layout.buildDirectory.dir('generated-vue-resources')
+
+sourceSets {
+    main {
+        resources {
+            srcDir(vueResourcesStaging)
+        }
+    }
+}
+
+tasks.register('npmCiWorldgenWebEditor', Exec) {
+    group = 'build'
+    description = 'npm ci in worldgen-web-editor'
+    workingDir = vueAppDir
+    commandLine npmExecutable(), 'ci'
+    inputs.file("${vueAppDir}/package-lock.json")
+    inputs.file("${vueAppDir}/package.json")
+    outputs.dir("${vueAppDir}/node_modules")
+}
+
+tasks.register('npmRunBuildWorldgenWebEditor', Exec) {
+    group = 'build'
+    description = 'Vite production build (worldgen-web-editor); uses build-only (no vue-tsc)'
+    dependsOn 'npmCiWorldgenWebEditor'
+    workingDir = vueAppDir
+    commandLine npmExecutable(), 'run', 'build-only'
+    inputs.dir("${vueAppDir}/src")
+    inputs.file("${vueAppDir}/package.json")
+    inputs.file("${vueAppDir}/vite.config.ts")
+    inputs.file("${vueAppDir}/index.html")
+    inputs.file("${vueAppDir}/tsconfig.json")
+    inputs.file("${vueAppDir}/tsconfig.app.json")
+    outputs.dir("${vueAppDir}/dist")
+}
+
+tasks.register('copyVueDistToResources', Copy) {
+    dependsOn 'npmRunBuildWorldgenWebEditor'
+    from("${vueAppDir}/dist")
+    into(vueResourcesStaging.map { it.dir('node-editor-web') })
+}
+
+tasks.register('writeDefaultRuntimeConfig') {
+    group = 'build'
+    description = 'Writes default runtime config JSON next to built jar'
+    outputs.file(layout.buildDirectory.file("libs/${base.archivesName.get()}.config.json"))
+    doLast {
+        def outFile = layout.buildDirectory.file("libs/${base.archivesName.get()}.config.json").get().asFile
+        outFile.parentFile.mkdirs()
+        def payload = [
+                port              : 15009,
+                allowNonLocalhost : false
+        ]
+        outFile.setText(JsonOutput.prettyPrint(JsonOutput.toJson(payload)) + System.lineSeparator(), 'UTF-8')
+    }
+}
+
+javadoc {
+    options.addStringOption('Xdoclint:-missing', '-quiet')
+}
+
+def hytaleServerJar = file("${hytaleHome}/install/${patchline}/package/game/latest/Server/HytaleServer.jar")
+
+dependencies {
+    implementation(files(hytaleServerJar))
+    implementation('org.springframework:spring-webmvc:7.0.6')
+    implementation('org.apache.tomcat.embed:tomcat-embed-core:11.0.21')
+}
+
+// Default jar only contains plugin classes; the server does not put this project's Gradle deps on the mod classpath.
+// Bundle runtime libraries (Spring, Tomcat, …) but not HytaleServer.jar, which the host already provides.
+tasks.named('jar', org.gradle.jvm.tasks.Jar) {
+    dependsOn 'writeDefaultRuntimeConfig'
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from {
+        configurations.runtimeClasspath.findAll { dep ->
+            !dep.name.equalsIgnoreCase('HytaleServer.jar')
+        }.collect { zipTree(it) }
+    }
+}
+
+def serverRunDir = file("$projectDir/run")
+if (!serverRunDir.exists()) {
+    serverRunDir.mkdirs()
+}
+
+tasks.register('updatePluginManifest') {
+    def manifestFile = file('src/main/resources/manifest.json')
+    doLast {
+        if (!manifestFile.exists()) {
+            throw new GradleException("Could not find manifest.json at ${manifestFile.path}!")
+        }
+        def manifestJson = new JsonSlurper().parseText(manifestFile.text)
+        manifestJson.Version = version
+        manifestJson.IncludesAssetPack = includes_pack.toBoolean()
+        manifestFile.text = JsonOutput.prettyPrint(JsonOutput.toJson(manifestJson))
+    }
+}
+
+tasks.named('processResources') {
+    dependsOn 'updatePluginManifest', 'copyVueDistToResources'
+}
+
+def createServerRunArguments(List<String> extraModSrcMainDirs) {
+    def programParameters = '--allow-op --disable-sentry --assets="' + "${hytaleHome}/install/$patchline/package/game/latest/Assets.zip" + '"'
+    def modPaths = []
+    if (includes_pack.toBoolean()) {
+        modPaths << sourceSets.main.java.srcDirs.first().parentFile.absolutePath
+    }
+    if (extraModSrcMainDirs != null) {
+        extraModSrcMainDirs.each { p ->
+            if (p != null && !p.toString().isBlank()) {
+                modPaths << p.toString()
+            }
+        }
+    }
+    if (load_user_mods.toBoolean()) {
+        modPaths << "${hytaleHome}/UserData/Mods"
+    }
+    if (!modPaths.isEmpty()) {
+        programParameters += ' --mods="' + modPaths.join(',') + '"'
+    }
+    return programParameters
+}
+
+def parseArgs(String argsStr) {
+    def args = []
+    def current = new StringBuilder()
+    boolean inQuotes = false
+
+    argsStr.toCharArray().each { char c ->
+        if (c == '"') {
+            inQuotes = !inQuotes
+        } else if (c == ' ' as char && !inQuotes) {
+            if (current.length() > 0) {
+                args << current.toString()
+                current.setLength(0)
+            }
+        } else {
+            current.append(c)
+        }
+    }
+
+    if (current.length() > 0) {
+        args << current.toString()
+    }
+
+    return args
+}
+
+def skylandseaDevModRoot() {
+    file("${rootDir}/../skylandsea-plugin/src/main").absolutePath
+}
+
+idea.project.settings.runConfigurations {
+    'HytaleServer (EditorWeb)'(org.jetbrains.gradle.ext.Application) {
+        mainClass = 'com.hypixel.hytale.Main'
+        moduleName = project.idea.module.name + '.main'
+        programParameters = createServerRunArguments([])
+        workingDirectory = serverRunDir.absolutePath
+    }
+    'HytaleServer + Skylandsea (EditorWeb)'(org.jetbrains.gradle.ext.Application) {
+        mainClass = 'com.hypixel.hytale.Main'
+        moduleName = project.idea.module.name + '.main'
+        programParameters = createServerRunArguments([skylandseaDevModRoot()])
+        workingDirectory = serverRunDir.absolutePath
+    }
+}
+
+tasks.register('runHytaleServer', JavaExec) {
+    group = 'application'
+    description = 'Runs the Hytale server with this plugin only'
+    mainClass = 'com.hypixel.hytale.Main'
+    classpath = sourceSets.main.runtimeClasspath
+    workingDir = serverRunDir
+    standardInput = System.in
+    args parseArgs(createServerRunArguments([]))
+}
+
+tasks.register('runHytaleServerWithSkylandsea', JavaExec) {
+    group = 'application'
+    description = 'Runs the Hytale server with skylandsea asset pack and this debugger/editor plugin'
+    mainClass = 'com.hypixel.hytale.Main'
+    classpath = sourceSets.main.runtimeClasspath
+    workingDir = serverRunDir
+    standardInput = System.in
+    args parseArgs(createServerRunArguments([skylandseaDevModRoot()]))
+}

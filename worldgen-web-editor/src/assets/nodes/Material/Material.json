@@ -1,0 +1,63 @@
+{
+  "Id": "Material",
+  "Title": "Material",
+  "Color": "Yellow",
+  "Description" : "Defines a block's solid and fluid Material content.",
+  "Content" : [
+    {
+      "Id" : "Solid",
+      "Type" : "SmallString",
+      "Options" : {
+        "Label" : "Solid",
+        "Default" : "",
+        "Width" : 350,
+        "Description" : "Defines the Solid Material's rotation."
+      }
+    },
+    {
+      "Id" : "Fluid",
+      "Type" : "SmallString",
+      "Options" : {
+        "Label" : "Fluid",
+        "Default" : "",
+        "Width" : 350
+      }
+    }
+  ],
+  "Outputs": [
+    {
+      "Id" : "SolidRotation",
+      "Type" : "OrthogonalRotation.Connection",
+      "Color" : "Orange",
+      "Multiple" : false,
+      "Label" : "SolidRotation",
+      "Fields": [
+        {
+          "Id" : "SolidBottomUp",
+          "Type" : "Checkbox",
+          "Options" : {
+            "Label" : "SolidBottomUp",
+            "Default" : false,
+            "Description" : "Rotates the Material upside down. The pin overrides this."
+          }
+        }
+      ]
+    }
+  ],
+  "Inputs": [
+    {
+      "Id": "Output",
+      "Type": "Material.Connection",
+      "Color": "Yellow"
+    }
+  ],
+  "Schema": {
+    "Solid" : "Solid",
+    "Fluid" : "Fluid",
+    "SolidBottomUp" : "SolidBottomUp",
+    "SolidRotation" : {
+      "Node" : "OrthogonalRotation",
+      "Pin" : "SolidRotation"
+    }
+  }
+}

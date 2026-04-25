@@ -1,0 +1,46 @@
+{
+  "Environments": [
+    "Env_Skylandsea"
+  ],
+  "NPCs": [
+    {
+      "Weight": 3,
+      "SpawnBlockSet": "Birds",
+      "Id": "Crow",
+      "Flock": "Group_Small"
+    },
+    {
+      "Weight": 3,
+      "SpawnBlockSet": "Birds",
+      "Id": "Whale_Humpback_Flying"
+    },
+    {
+      "Weight": 5,
+      "SpawnBlockSet": "Birds",
+      "Id": "Finch_Green",
+      "Flock": "Group_Small"
+    },
+    {
+      "Weight": 3,
+      "SpawnBlockSet": "Birds",
+      "Id": "Bluebird",
+      "Flock": "Group_Small"
+    },
+    {
+      "Weight": 5,
+      "SpawnBlockSet": "Birds",
+      "Id": "Sparrow",
+      "Flock": "Group_Small"
+    },
+    {
+      "Weight": 5,
+      "SpawnBlockSet": "Birds",
+      "Id": "Pigeon",
+      "Flock": "One_Or_Two"
+    }
+  ],
+  "DayTimeRange": [
+    0,
+    23
+  ]
+}

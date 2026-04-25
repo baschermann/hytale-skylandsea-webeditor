@@ -1,0 +1,39 @@
+{
+  "Id": "Key.MultiMix.Density",
+  "Title": "Key MultiMix Density",
+  "Color": "Orange",
+  "Content": [
+    {
+      "Id": "Value",
+      "Type": "Float",
+      "Options": {
+        "Label": "Value",
+        "Default": 0.0,
+        "Width": 100,
+        "Description" : "Pins the Density input to this value of the Gauge Density field. When the Gauge approaches this value, the output of the MultiMix appraoches the value of the Density field referenced by the index."
+      }
+    },
+    {
+      "Id": "DensityIndex",
+      "Type": "Int",
+      "Options": {
+        "Label": "DensityIndex",
+        "Default": -1,
+        "Width": 40,
+        "Description" : "The number is the index of an input Density field."
+      }
+    }
+  ],
+  "Outputs": [],
+  "Inputs": [
+    {
+      "Id": "Key.MultiMix.Output",
+      "Type": "Key.MultiMix.Density.Connection",
+      "Color": "Purple"
+    }
+  ],
+  "Schema": {
+    "Value": "Value",
+    "DensityIndex": "DensityIndex"
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "Id": "Cuboid.Density",
+  "Title": "Cuboid Density",
+  "Color": "Purple",
+  "Description" : "The Cuboid is a deformed Cube. You can use a Scale vector to stretch and compress the Cube in different directions. You can spin it by giving it a new Y axis and a spin angle (in degrees).",
+  "Content": [
+    {
+      "Id" : "ExportAs",
+      "Type" : "SmallString",
+      "Options" : {
+        "Label" : "ExportAs",
+        "Default" : "",
+        "Width" : 250
+      }
+    },
+    {
+      "Id": "Skip",
+      "Type": "Checkbox",
+      "Options": {
+        "Label": "Skip",
+        "Default" : false
+      }
+    },
+    {
+      "Id": "Spin",
+      "Type": "Float",
+      "Options": {
+        "Label": "Spin",
+        "Default" : 0.0,
+        "Description" : "Determines the angle in degrees by which to spin the Ellipsoid around its Y axis."
+      }
+    }
+  ],
+  "Outputs": [
+    {
+      "Id": "Curve",
+      "Type": "CurveConnection",
+      "Color": "Orange",
+      "Label" : "Curve",
+      "Description" : "Maps the Distance from the origin to a Density value."
+    },
+    {
+      "Id": "Scale",
+      "Type": "Point3D.Connection",
+      "Color": "Orange",
+      "Label" : "Scale",
+      "Description" : "Determines how much to stretch the Cube in each direction."
+    },
+    {
+      "Id": "NewYAxis",
+      "Type": "Point3D.Connection",
+      "Color": "Orange",
+      "Label" : "NewYAxis",
+      "Description" : "Let’s you rotate the field around its origin."
+    }
+  ],
+  "Inputs": [
+    {
+      "Id": "DensityOutput",
+      "Type": "DensityConnection",
+      "Color": "Purple"
+    }
+  ],
+  "Schema": {
+    "Type" : "Cuboid",
+    "ExportAs" : "ExportAs",
+    "Skip" : "Skip",
+    "Spin" : "Spin",
+    "Curve" : {
+      "Node" : "CurveVariants",
+      "Pin" : "Curve"
+    },
+    "Scale" : {
+      "Node" : "Point3D",
+      "Pin" : "Scale"
+    },
+    "NewYAxis" : {
+      "Node" : "Point3D",
+      "Pin" : "NewYAxis"
+    }
+  }
+}

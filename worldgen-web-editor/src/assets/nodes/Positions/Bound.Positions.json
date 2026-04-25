@@ -1,0 +1,59 @@
+{
+  "Id": "Bound.Positions",
+  "Title": "Bound Positions",
+  "Color": "Blue",
+  "Description" : "Limits the positions to a bounded region.",
+  "Content" : [
+    {
+      "Id" : "ExportAs",
+      "Type" : "SmallString",
+      "Options" : {
+        "Label" : "ExportAs",
+        "Default" : "",
+        "Width" : 250
+      }
+    },
+    {
+      "Id": "Skip",
+      "Type": "Checkbox",
+      "Options": {
+        "Label": "Skip",
+        "Default" : false
+      }
+    }
+  ],
+  "Outputs": [
+    {
+      "Id": "Positions",
+      "Type": "PositionsConnection",
+      "Color": "Blue",
+      "Label" : "Positions"
+    },
+    {
+      "Id": "Bounds",
+      "Type": "DecimalBounds3d.Connection",
+      "Color": "Orange",
+      "Label" : "Bounds"
+    }
+  ],
+  "Inputs": [
+    {
+      "Id": "Output",
+      "Type": "PositionsConnection",
+      "Color": "Blue"
+    }
+  ],
+  "Schema": {
+    "Type" : "Bound",
+    "ExportAs" : "ExportAs",
+    "Skip" : "Skip",
+    "Bounds" : {
+      "Node" : "DecimalBounds3d",
+      "Pin" : "Bounds"
+    },
+    "Positions" : {
+      "Node" : "PositionsVariants",
+      "Pin" : "Positions"
+    }
+  }
+}

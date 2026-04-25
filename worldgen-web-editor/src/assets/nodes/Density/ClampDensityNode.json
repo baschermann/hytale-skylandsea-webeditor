@@ -1,0 +1,73 @@
+{
+  "Id": "ClampDensityNode",
+  "Title": "Clamp Density",
+  "Color": "Purple",
+  "Description" : "This node ensures that the output is within the provided range which is defined by the two wall parameters. Input values that are inside the range don’t change and inputs values outside the range are brought back to the range’s extreme.",
+  "Content" : [
+    {
+      "Id" : "ExportAs",
+      "Type" : "SmallString",
+      "Options" : {
+        "Label" : "ExportAs",
+        "Default" : "",
+        "Width" : 250
+      }
+    },
+    {
+      "Id": "Skip",
+      "Type": "Checkbox",
+      "Options": {
+        "Label": "Skip",
+        "Default" : false
+      }
+    },
+    {
+      "Id": "WallA",
+      "Type": "Float",
+      "Options": {
+        "Label": "WallA",
+        "Default" : -1.0,
+        "Width" : 100,
+        "Description" : "Output values limit A."
+      }
+    },
+    {
+      "Id": "WallB",
+      "Type": "Float",
+      "Options": {
+        "Label": "WallB",
+        "Default" : 1.0,
+        "Width" : 100,
+        "Description" : "Output values limit B."
+      }
+    }
+  ],
+  "Outputs": [
+    {
+      "Id" : "DensityInputs",
+      "Type" : "DensityConnection",
+      "Color" : "Purple",
+      "Multiple" : true,
+      "Label" : "Inputs",
+      "Description" : "0: Density to be clamped."
+    }
+  ],
+  "Inputs": [
+    {
+      "Id": "DensityOutput",
+      "Type": "DensityConnection",
+      "Color": "Purple"
+    }
+  ],
+  "Schema": {
+    "Type" : "Clamp",
+    "ExportAs" : "ExportAs",
+    "Skip" : "Skip",
+    "WallA" : "WallA",
+    "WallB" : "WallB",
+    "Inputs" : {
+      "Node" : "DensityNodeVariants",
+      "Pin" : "DensityInputs"
+    }
+  }
+}

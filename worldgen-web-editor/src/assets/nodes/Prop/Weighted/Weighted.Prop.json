@@ -1,0 +1,62 @@
+{
+  "Id": "Weighted.Prop",
+  "Title": "Weighted Prop",
+  "Color": "Green",
+  "Description" : "Picks a Prop to place based on a seed and weights.",
+  "Content" : [
+    {
+      "Id" : "ExportAs",
+      "Type" : "SmallString",
+      "Options" : {
+        "Label" : "ExportAs",
+        "Default" : "",
+        "Width" : 250
+      }
+    },
+    {
+      "Id": "Skip",
+      "Type": "Checkbox",
+      "Options": {
+        "Label": "Skip",
+        "Default" : false
+      }
+    },
+    {
+      "Id" : "Seed",
+      "Type" : "SmallString",
+      "Options" : {
+        "Label" : "Seed",
+        "Default" : "",
+        "Width" : 250,
+        "Description" : "The seed determining which Prop is picked. This seed also mutates the seed passed to the children."
+      }
+    }
+  ],
+  "Outputs": [
+    {
+      "Id": "Entries",
+      "Type": "Entry.Weighted.Prop.Connection",
+      "Color": "Orange",
+      "Multiple" : true,
+      "Label" : "Entries",
+      "Description" : "Weighted entries."
+    }
+  ],
+  "Inputs": [
+    {
+      "Id": "Output",
+      "Type": "PropConnection",
+      "Color": "Green"
+    }
+  ],
+  "Schema": {
+    "Type" : "Weighted",
+    "ExportAs" : "ExportAs",
+    "Skip" : "Skip",
+    "Seed" : "Seed",
+    "Entries" : {
+      "Node" : "Entry.Weighted.Prefab.Prop",
+      "Pin" : "Entries"
+    }
+  }
+}

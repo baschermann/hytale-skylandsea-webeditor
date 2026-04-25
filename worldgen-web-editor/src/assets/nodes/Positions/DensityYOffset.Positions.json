@@ -1,0 +1,74 @@
+{
+  "Id": "DensityYOffset.Positions",
+  "Title": "Y Offset Positions",
+  "Color": "Blue",
+  "Description": "For each input position, samples the Density field at that point and adds Multiplier × field value to Y, then keeps the point only if it still lies in the original bounds. The child positions provider sees the vertical bounds expanded by |Multiplier| (assuming the field stays within about [-1, 1]), matching stock Jitter3d behavior so PCN and similar sources are not starved of candidates after the offset.",
+  "Content": [
+    {
+      "Id": "ExportAs",
+      "Type": "SmallString",
+      "Options": {
+        "Label": "ExportAs",
+        "Default": "",
+        "Width": 250
+      }
+    },
+    {
+      "Id": "Skip",
+      "Type": "Checkbox",
+      "Options": {
+        "Label": "Skip",
+        "Default": false
+      }
+    },
+    {
+      "Id": "Multiplier",
+      "Type": "Float",
+      "Options": {
+        "Label": "Multiplier",
+        "Default": 1,
+        "Width": 100,
+        "Description": "Scaled density is added to Y: y += Multiplier × density(position)."
+      }
+    }
+  ],
+  "Outputs": [
+    {
+      "Id": "PositionsConnection",
+      "Type": "PositionsConnection",
+      "Color": "Blue",
+      "Multiple": false,
+      "Label": "Positions",
+      "Description": "Child positions provider (e.g. grid or Deterministic Random)."
+    },
+    {
+      "Id": "DensityConnection",
+      "Type": "DensityConnection",
+      "Color": "Purple",
+      "Multiple": false,
+      "Label": "FieldFunction",
+      "Description": "Density evaluated at each emitted position (e.g. SimplexNoise2D)."
+    }
+  ],
+  "Inputs": [
+    {
+      "Id": "Output",
+      "Type": "PositionsConnection",
+      "Color": "Blue"
+    }
+  ],
+  "Schema": {
+    "Type": "DensityYOffset",
+    "ExportAs": "ExportAs",
+    "Skip": "Skip",
+    "Multiplier": "Multiplier",
+    "FieldFunction": {
+      "Node": "DensityNodeVariants",
+      "Pin": "DensityConnection"
+    },
+    "Positions": {
+      "Node": "PositionsVariants",
+      "Pin": "PositionsConnection"
+    }
+  }
+}

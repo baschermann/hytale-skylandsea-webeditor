@@ -1,0 +1,72 @@
+{
+  "Id": "Cuboid.Pattern",
+  "Title": "Cuboid Pattern",
+  "Color": "Pink",
+  "Description" : "Defines a cuboid region relative to the Pattern’s origin. The region is anchored by Min and Max inclusive points. This is similar to the shape of a creative Selection Tool. The SubPattern is tested against every position inside the cuboid. The Cuboid Pattern validates only if all the inner positions are validated by the SubPattern.",
+  "Content" : [
+    {
+      "Id" : "ExportAs",
+      "Type" : "SmallString",
+      "Options" : {
+        "Label" : "ExportAs",
+        "Default" : "",
+        "Width" : 250
+      }
+    },
+    {
+      "Id": "Skip",
+      "Type": "Checkbox",
+      "Options": {
+        "Label": "Skip",
+        "Default" : false
+      }
+    }
+  ],
+  "Outputs": [
+    {
+      "Id": "Max",
+      "Type": "Point3D.Connection",
+      "Color": "Orange",
+      "Label" : "Max",
+      "Description" : "Inclusive maximum point of the cuboid relative to the Pattern’s origin."
+    },
+    {
+      "Id": "Min",
+      "Type": "Point3D.Connection",
+      "Color": "Orange",
+      "Label" : "Min",
+      "Description" : "Inclusive minimum point of the cuboid relative to the Pattern’s origin."
+    },
+    {
+      "Id": "SubPattern",
+      "Type": "Pattern.Connection",
+      "Color": "Pink",
+      "Label" : "SubPattern",
+      "Description" : "The Cuboid uses this Pattern to validate the positions inside itself."
+    }
+  ],
+  "Inputs": [
+    {
+      "Id": "Output",
+      "Type": "Pattern.Connection",
+      "Color": "Pink"
+    }
+  ],
+  "Schema": {
+    "Type" : "Cuboid",
+    "ExportAs" : "ExportAs",
+    "Skip" : "Skip",
+    "Max" : {
+      "Node" : "Point3D",
+      "Pin" : "Max"
+    },
+    "Min" : {
+      "Node" : "Point3D",
+      "Pin" : "Min"
+    },
+    "SubPattern" : {
+      "Node" : "Pattern.Variants",
+      "Pin" : "SubPattern"
+    }
+  }
+}

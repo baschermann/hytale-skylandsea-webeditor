@@ -1,0 +1,60 @@
+{
+  "Id": "Clamp.Curve",
+  "Title": "Clamp Curve",
+  "Color": "Orange",
+  "Description" : "This clamps the curve between the two wall values provided. The output of this curve will never reach outside the walls.",
+  "Content" : [
+    {
+      "Id" : "ExportAs",
+      "Type" : "SmallString",
+      "Options" : {
+        "Label" : "ExportAs",
+        "Default" : "",
+        "Width" : 250
+      }
+    },
+    {
+      "Id": "WallA",
+      "Type": "Float",
+      "Options": {
+        "Label": "WallA",
+        "Default" : 1.0,
+        "Width" : 100
+      }
+    },
+    {
+      "Id": "WallB",
+      "Type": "Float",
+      "Options": {
+        "Label": "WallB",
+        "Default" : -1.0,
+        "Width" : 100
+      }
+    }
+  ],
+  "Outputs": [
+    {
+      "Id": "Curve",
+      "Type": "CurveConnection",
+      "Color": "Orange",
+      "Label" : "Curve"
+    }
+  ],
+  "Inputs": [
+    {
+      "Id": "Input",
+      "Type": "CurveConnection",
+      "Color": "Orange"
+    }
+  ],
+  "Schema": {
+    "Type" : "Clamp",
+    "ExportAs" : "ExportAs",
+    "WallA" : "WallA",
+    "WallB" : "WallB",
+    "Curve" : {
+      "Node" : "CurveVariants",
+      "Pin" : "Curve"
+    }
+  }
+}

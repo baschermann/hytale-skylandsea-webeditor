@@ -1,0 +1,62 @@
+{
+  "Id": "SmoothMaxDensityNode",
+  "Title": "SmoothMax Density",
+  "Color": "Purple",
+  "Description" : "The output is a smoothed maximum between the two inputs.",
+  "Content" : [
+    {
+      "Id" : "ExportAs",
+      "Type" : "SmallString",
+      "Options" : {
+        "Label" : "ExportAs",
+        "Default" : "",
+        "Width" : 250
+      }
+    },
+    {
+      "Id": "Skip",
+      "Type": "Checkbox",
+      "Options": {
+        "Label": "Skip",
+        "Default" : false
+      }
+    },
+    {
+      "Id": "Range",
+      "Type": "Float",
+      "Options": {
+        "Label": "Value",
+        "Default" : 0.2,
+        "Width" : 100,
+        "Description" : "Greater values result in more smoothing. A good starter value could be 0.2."
+      }
+    }
+  ],
+  "Outputs": [
+    {
+      "Id" : "DensityInputs",
+      "Type" : "DensityConnection",
+      "Color" : "Purple",
+      "Multiple" : true,
+      "Label" : "Inputs",
+      "Description" : "0: Input A.\n1: Input B."
+    }
+  ],
+  "Inputs": [
+    {
+      "Id": "DensityOutput",
+      "Type": "DensityConnection",
+      "Color": "Purple"
+    }
+  ],
+  "Schema": {
+    "Type" : "SmoothMax",
+    "ExportAs" : "ExportAs",
+    "Skip" : "Skip",
+    "Range" : "Range",
+    "Inputs" : {
+      "Node" : "DensityNodeVariants",
+      "Pin" : "DensityInputs"
+    }
+  }
+}

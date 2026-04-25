@@ -1,0 +1,61 @@
+{
+  "Id": "BaseHeight.Positions",
+  "Title": "BaseHeight Positions",
+  "Color": "Blue",
+  "Description" : "Vertically offsets the Positions inside the configured vertical region by the number of blocks determined by the referenced DecimalConstant.",
+  "Content" : [
+    {
+      "Id" : "ExportAs",
+      "Type" : "SmallString",
+      "Options" : {
+        "Label" : "ExportAs",
+        "Default" : "",
+        "Width" : 250
+      }
+    },
+    {
+      "Id": "Skip",
+      "Type": "Checkbox",
+      "Options": {
+        "Label": "Skip",
+        "Default" : false
+      }
+    },
+    {
+      "Id" : "BedName",
+      "Type" : "SmallString",
+      "Options" : {
+        "Label" : "BaseHeightName",
+        "Default" : "",
+        "Width" : 250,
+        "Description" : "Name of the DecimalConstant to reference."
+      }
+    }
+  ],
+  "Outputs": [
+    {
+      "Id": "PositionsConnection",
+      "Type": "PositionsConnection",
+      "Color": "Blue",
+      "Multiple" : false,
+      "Label" : "Positions"
+    }
+  ],
+  "Inputs": [
+    {
+      "Id": "Output",
+      "Type": "PositionsConnection",
+      "Color": "Blue"
+    }
+  ],
+  "Schema": {
+    "Type" : "BaseHeight",
+    "ExportAs" : "ExportAs",
+    "Skip" : "Skip",
+    "BedName" : "BedName",
+    "Positions" : {
+      "Node" : "PositionsVariants",
+      "Pin" : "PositionsConnection"
+    }
+  }
+}

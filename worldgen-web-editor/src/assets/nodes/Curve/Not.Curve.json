@@ -1,0 +1,40 @@
+{
+  "Id": "Not.Curve",
+  "Title": "Not Curve",
+  "Color": "Orange",
+  "Description" : "This applies a logical NOT operation on the child curve. When the child’s output is 1, this will output 0, and when the child’s output is 0, this will output 1. All numbers in between are scaled accordingly.",
+  "Content" : [
+    {
+      "Id" : "ExportAs",
+      "Type" : "SmallString",
+      "Options" : {
+        "Label" : "ExportAs",
+        "Default" : "",
+        "Width" : 250
+      }
+    }
+  ],
+  "Outputs": [
+    {
+      "Id": "Curve",
+      "Type": "CurveConnection",
+      "Color": "Orange",
+      "Label" : "Curve"
+    }
+  ],
+  "Inputs": [
+    {
+      "Id": "Input",
+      "Type": "CurveConnection",
+      "Color": "Orange"
+    }
+  ],
+  "Schema": {
+    "Type" : "Not",
+    "ExportAs" : "ExportAs",
+    "Curve" : {
+      "Node" : "CurveVariants",
+      "Pin" : "Curve"
+    }
+  }
+}

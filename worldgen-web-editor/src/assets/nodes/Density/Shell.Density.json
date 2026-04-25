@@ -1,0 +1,82 @@
+{
+  "Id": "Shell.Density",
+  "Title": "Shell Density",
+  "Color": "Purple",
+  "Description" : "The Shell Density node allows you to define regions of the shell around the origin {0, 0, 0} of the field based on the direction and the distance from origin. The angles, thickness and Density values of the shell are fully configurable through Curve assets.",
+  "Content": [
+    {
+      "Id" : "ExportAs",
+      "Type" : "SmallString",
+      "Options" : {
+        "Label" : "ExportAs",
+        "Default" : "",
+        "Width" : 250
+      }
+    },
+    {
+      "Id": "Skip",
+      "Type": "Checkbox",
+      "Options": {
+        "Label": "Skip",
+        "Default" : false
+      }
+    },
+    {
+      "Id": "Mirror",
+      "Type": "Checkbox",
+      "Options": {
+        "Label": "Mirror",
+        "Default" : false,
+        "Description" : "If true then the angle is mirrored in both directions of the axis."
+      }
+    }
+  ],
+  "Outputs": [
+    {
+      "Id": "AngleCurve",
+      "Type": "CurveConnection",
+      "Color": "Orange",
+      "Label" : "AngleCurve",
+      "Description" : "Determines the Density value at any given angle from the axis."
+    },
+    {
+      "Id": "DistanceCurve",
+      "Type": "CurveConnection",
+      "Color": "Orange",
+      "Label" : "DistanceCurve",
+      "Description" : "Determines the Density value at any distance from the origin."
+    },
+    {
+      "Id": "Axis",
+      "Type": "Point3D.Connection",
+      "Color": "Orange",
+      "Label" : "Axis",
+      "Description" : "Determines the axis against which the angle is calculated."
+    }
+  ],
+  "Inputs": [
+    {
+      "Id": "DensityOutput",
+      "Type": "DensityConnection",
+      "Color": "Purple"
+    }
+  ],
+  "Schema": {
+    "Type" : "Shell",
+    "ExportAs" : "ExportAs",
+    "Skip" : "Skip",
+    "Mirror" : "Mirror",
+    "Axis" : {
+      "Node" : "Point3D",
+      "Pin" : "Axis"
+    },
+    "AngleCurve" : {
+      "Node" : "CurveVariants",
+      "Pin" : "AngleCurve"
+    },
+    "DistanceCurve" : {
+      "Node" : "CurveVariants",
+      "Pin" : "DistanceCurve"
+    }
+  }
+}

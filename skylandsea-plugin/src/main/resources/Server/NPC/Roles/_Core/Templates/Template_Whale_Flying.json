@@ -1,0 +1,273 @@
+{
+  "Type": "Abstract",
+  "StartState": "Idle",
+  "Parameters": {
+    "Appearance": {
+      "Value": "Whale_Humpback_Flying",
+      "Description": "Model to be used"
+    },
+    "DropList": {
+      "Value": "Empty",
+      "Description": "Drop Items"
+    },
+    "FlockArray": {
+      "Value": [
+        "Template_Whale_Flying"
+      ],
+      "Description": "Solo: only this template type; variants should override with their own role id"
+    },
+    "WanderRadius": {
+      "Value": 100,
+      "Description": "Horizontal wander radius around leash / spawn"
+    },
+    "MinHeightOverGround": {
+      "Value": 150,
+      "Description": "Min height over ground for Fly controller"
+    },
+    "MaxHeightOverGround": {
+      "Value": 250,
+      "Description": "Max height over ground for Fly controller"
+    },
+    "MaxHealth": {
+      "Value": 100,
+      "Description": "Max health for the NPC"
+    },
+    "DeathParticles": {
+      "Value": "Effect_Death",
+      "Description": "Particle system when corpse despawns"
+    },
+    "DropDeathItemsInstantly": {
+      "Value": false,
+      "Description": "If false, drops execute when corpse disappears"
+    },
+    "DeathAnimationTime": {
+      "Value": 2,
+      "Description": "Corpse linger time"
+    },
+    "IsMemory": {
+      "Value": false,
+      "Description": "Memory collectible"
+    },
+    "MemoriesCategory": {
+      "Value": "Other",
+      "Description": "Memory category"
+    },
+    "MemoriesNameOverride": {
+      "Value": "",
+      "Description": "Override memory display name"
+    },
+    "NameTranslationKey": {
+      "Value": "server.npcRoles.Template.name",
+      "Description": "Translation key for NPC name"
+    }
+  },
+  "IsMemory": {
+    "Compute": "IsMemory"
+  },
+  "MemoriesCategory": {
+    "Compute": "MemoriesCategory"
+  },
+  "MemoriesNameOverride": {
+    "Compute": "MemoriesNameOverride"
+  },
+  "DropList": {
+    "Compute": "DropList"
+  },
+  "FlockSpawnTypes": {
+    "Compute": "FlockArray"
+  },
+  "DisableDamageGroups": [
+    "Self"
+  ],
+  "Appearance": {
+    "Compute": "Appearance"
+  },
+  "KnockbackScale": 0.5,
+  "DeathParticles": {
+    "Compute": "DeathParticles"
+  },
+  "DropDeathItemsInstantly": {
+    "Compute": "DropDeathItemsInstantly"
+  },
+  "DeathAnimationTime": {
+    "Compute": "DeathAnimationTime"
+  },
+  "MotionControllerList": [
+    {
+      "Type": "Fly",
+      "MaxHorizontalSpeed": 14,
+      "MaxSinkSpeed": 2,
+      "MaxClimbSpeed": 6,
+      "MinAirSpeed": 3,
+      "Acceleration": 4,
+      "MinHeightOverGround": {
+        "Compute": "MinHeightOverGround"
+      },
+      "MaxHeightOverGround": {
+        "Compute": "MaxHeightOverGround"
+      },
+      "MaxRollAngle": 15,
+      "MaxTurnSpeed": 3
+    }
+  ],
+  "MaxHealth": {
+    "Compute": "MaxHealth"
+  },
+  "Instructions": [
+    {
+      "Instructions": [
+        {
+          "Sensor": {
+            "Type": "State",
+            "State": "Idle"
+          },
+          "Instructions": [
+            {
+              "Sensor": {
+                "Type": "State",
+                "State": ".Default"
+              },
+              "Actions": [
+                {
+                  "Type": "PlayAnimation",
+                  "Slot": "Status"
+                },
+                {
+                  "Type": "State",
+                  "State": ".Fly"
+                }
+              ]
+            },
+            {
+              "Sensor": {
+                "Type": "State",
+                "State": ".Fly"
+              },
+              "Instructions": [
+                {
+                  "Continue": true,
+                  "Sensor": {
+                    "Type": "Any"
+                  },
+                  "BodyMotion": {
+                    "Type": "WanderInCircle",
+                    "Radius": {
+                      "Compute": "WanderRadius"
+                    },
+                    "MaxHeadingChange": 1,
+                    "RelativeSpeed": 0.3
+                  }
+                },
+                {
+                  "Sensor": {
+                    "Type": "Damage",
+                    "Combat": true,
+                    "TargetSlot": "LockedTarget"
+                  },
+                  "Actions": [
+                    {
+                      "Type": "State",
+                      "State": "Panic"
+                    }
+                  ]
+                },
+                {
+                  "Sensor": {
+                    "Type": "Damage",
+                    "Combat": false,
+                    "Other": true
+                  },
+                  "Actions": [
+                    {
+                      "Type": "State",
+                      "State": "Panic"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Sensor": {
+            "Type": "State",
+            "State": "Panic"
+          },
+          "Instructions": [
+            {
+              "Continue": true,
+              "Sensor": {
+                "Type": "Any",
+                "Once": true
+              },
+              "Actions": [
+                {
+                  "Type": "PlayAnimation",
+                  "Slot": "Status",
+                  "Animation": "FlyFast"
+                }
+              ]
+            },
+            {
+              "Continue": true,
+              "Sensor": {
+                "Type": "Any"
+              },
+              "BodyMotion": {
+                "Type": "Sequence",
+                "Looped": true,
+                "Motions": [
+                  {
+                    "Type": "Timer",
+                    "Time": [
+                      2,
+                      4
+                    ],
+                    "Motion": {
+                      "Type": "WanderInCircle",
+                      "Radius": {
+                        "Compute": "WanderRadius"
+                      },
+                      "MaxHeadingChange": 35,
+                      "RelativeSpeed": 0.85
+                    }
+                  },
+                  {
+                    "Type": "Timer",
+                    "Time": [
+                      1,
+                      2
+                    ],
+                    "Motion": {
+                      "Type": "WanderInCircle",
+                      "Radius": {
+                        "Compute": "WanderRadius"
+                      },
+                      "MaxHeadingChange": 70,
+                      "RelativeSpeed": 0.85
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "Reference": "Component_Instruction_State_Timeout",
+              "Modify": {
+                "_ExportStates": [
+                  "Idle"
+                ],
+                "Delay": [
+                  4,
+                  8
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "NameTranslationKey": {
+    "Compute": "NameTranslationKey"
+  }
+}

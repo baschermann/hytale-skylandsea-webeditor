@@ -1,0 +1,40 @@
+{
+  "Id": "ImportedPositions",
+  "Title": "Imported Positions",
+  "Color": "Blue",
+  "Description" : "Imports an exported PositionsProvider.",
+  "Content" : [
+    {
+      "Id": "Skip",
+      "Type": "Checkbox",
+      "Options": {
+        "Label": "Skip",
+        "Default" : false
+      }
+    },
+    {
+      "Id": "Name",
+      "Type": "SmallString",
+      "Options": {
+        "Label": "Name",
+        "Default" : "",
+        "Width" : 150,
+        "Description" : "The exported PositionsProvider's name."
+      }
+    }
+  ],
+  "Outputs": [
+  ],
+  "Inputs": [
+    {
+      "Id": "Output",
+      "Type": "PositionsConnection",
+      "Color": "Blue"
+    }
+  ],
+  "Schema": {
+    "Type" : "Imported",
+    "Name" : "Name",
+    "Skip" : "Skip" 
+  }
+}

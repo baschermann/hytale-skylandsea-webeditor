@@ -1,0 +1,67 @@
+{
+  "Id": "Runtime",
+  "Title": "Runtime",
+  "Color": "Grey",
+  "Content" : [
+    {
+      "Id" : "Runtime",
+      "Type" : "Int",
+      "Options" : {
+        "Label" : "Runtime",
+        "Default" : 0,
+        "Width" : 40
+      }
+    },
+    {
+      "Id": "Skip",
+      "Type": "Checkbox",
+      "Options": {
+        "Label": "Skip",
+        "Default" : false
+      }
+    }
+  ],
+  "Outputs": [
+    {
+      "Id": "Positions",
+      "Type": "PositionsConnection",
+      "Color": "255,00,00",
+      "Label" : "[DEPRECATED] Positions"
+    },
+    {
+      "Id": "Assignments",
+      "Type": "AssignmentsConnection",
+      "Color": "255,00,00",
+      "Label" : "[DEPRECATED] Assignments"
+    },
+    {
+      "Id": "PropDistribution",
+      "Type": "PropDistribution.Connection",
+      "Color": "Aqua",
+      "Label" : "PropDistribution"
+    }
+  ],
+  "Inputs": [
+    {
+      "Id": "Output",
+      "Type": "RuntimeConnection",
+      "Color": "Grey"
+    }
+  ],
+  "Schema": {
+    "Skip" : "Skip",
+    "Runtime" : "Runtime",
+    "Positions" : {
+      "Node" : "PositionsVariants",
+      "Pin" : "Positions"
+    },
+    "Assignments" : {
+      "Node" : "AssignmentsVariants",
+      "Pin" : "Assignments"
+    },
+    "PropDistribution" : {
+      "Node" : "PropDistribution.Variants",
+      "Pin" : "PropDistribution"
+    }
+  }
+}

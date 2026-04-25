@@ -1,0 +1,59 @@
+{
+  "Id": "Anchor.Positions",
+  "Title": "Anchor Positions",
+  "Color": "Blue",
+  "Description" : "Anchors the origin of the child Positions field to the contextual Anchor, if one exists. For a contextual Anchor to exist, a parent of this node must produce an Anchor.\nYou can also reverse the effect later in the chain to move the origin back to the world’s origin, as in the screenshot below.",
+  "Content" : [
+    {
+      "Id" : "ExportAs",
+      "Type" : "SmallString",
+      "Options" : {
+        "Label" : "ExportAs",
+        "Default" : "",
+        "Width" : 250
+      }
+    },
+    {
+      "Id": "Skip",
+      "Type": "Checkbox",
+      "Options": {
+        "Label": "Skip",
+        "Default" : false
+      }
+    },
+    {
+      "Id": "Reversed",
+      "Type": "Checkbox",
+      "Options": {
+        "Label": "Reversed",
+        "Default" : false,
+        "Description" : "If true, reverses the origin of the child back to the world’s origin (or to the origin before the previous Anchor node)."
+      }
+    }
+  ],
+  "Outputs": [
+    {
+      "Id": "Positions",
+      "Type": "PositionsConnection",
+      "Color": "Blue",
+      "Label" : "Positions"
+    }
+  ],
+  "Inputs": [
+    {
+      "Id": "Output",
+      "Type": "PositionsConnection",
+      "Color": "Blue"
+    }
+  ],
+  "Schema": {
+    "Type" : "Anchor",
+    "ExportAs" : "ExportAs",
+    "Skip" : "Skip",
+    "Reversed" : "Reversed",
+    "Positions" : {
+      "Node" : "PositionsVariants",
+      "Pin" : "Positions"
+    }
+  }
+}

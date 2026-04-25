@@ -1,0 +1,71 @@
+{
+  "Id": "ClosestPosition.Positions",
+  "Title": "ClosestPosition",
+  "Color": "Blue",
+  "Description": "Emits the closest position to the current query center from the provided Positions field.",
+  "Content": [
+    {
+      "Id": "ExportAs",
+      "Type": "SmallString",
+      "Options": {
+        "Label": "ExportAs",
+        "Default": "",
+        "Width": 250
+      }
+    },
+    {
+      "Id": "Skip",
+      "Type": "Checkbox",
+      "Options": {
+        "Label": "Skip",
+        "Default": false
+      }
+    },
+    {
+      "Id": "MaxDistance",
+      "Type": "Float",
+      "Options": {
+        "Label": "MaxDistance",
+        "Default": 100,
+        "Width": 100
+      }
+    }
+  ],
+  "Outputs": [
+    {
+      "Id": "PositionsConnection",
+      "Type": "PositionsConnection",
+      "Color": "Blue",
+      "Multiple": false,
+      "Label": "Positions"
+    },
+    {
+      "Id": "DistanceFunction",
+      "Type": "DistanceFunctionPCNConnection",
+      "Color": "Olive",
+      "Multiple": false,
+      "Label": "DistanceFunction"
+    }
+  ],
+  "Inputs": [
+    {
+      "Id": "Output",
+      "Type": "PositionsConnection",
+      "Color": "Blue"
+    }
+  ],
+  "Schema": {
+    "Type": "ClosestPosition",
+    "ExportAs": "ExportAs",
+    "Skip": "Skip",
+    "MaxDistance": "MaxDistance",
+    "Positions": {
+      "Node": "PositionsVariants",
+      "Pin": "PositionsConnection"
+    },
+    "DistanceFunction": {
+      "Node": "PCNDistanceFunction",
+      "Pin": "DistanceFunction"
+    }
+  }
+}
