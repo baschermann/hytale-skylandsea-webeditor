@@ -5,6 +5,7 @@ plugins {
 
 import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
+import groovy.xml.XmlUtil
 import org.codehaus.groovy.runtime.GStringImpl
 import org.gradle.api.file.DuplicatesStrategy
 import org.gradle.internal.os.OperatingSystem
@@ -174,6 +175,45 @@ def createServerRunArguments(List<String> extraModSrcMainDirs) {
     return programParameters
 }
 
+/** IntelliJ path macros: repo paths via $PROJECT_DIR$, Hytale install via $USER_HOME$ (generated for current OS). */
+def ideaHytaleHomePrefix() {
+    def os = OperatingSystem.current()
+    if (os.isWindows()) {
+        return '$USER_HOME$/AppData/Roaming/Hytale'
+    }
+    if (os.isMacOsX()) {
+        return '$USER_HOME$/Library/Application Support/Hytale'
+    }
+    def flatpak = file("${System.getProperty('user.home')}/.var/app/com.hypixel.HytaleLauncher/data/Hytale")
+    if (flatpak.exists()) {
+        return '$USER_HOME$/.var/app/com.hypixel.HytaleLauncher/data/Hytale'
+    }
+    return '$USER_HOME$/.local/share/Hytale'
+}
+
+def createServerRunArgumentsForIdea(List<String> extraModIdeaPaths) {
+    def root = ideaHytaleHomePrefix()
+    def programParameters = '--allow-op --disable-sentry --assets="' + "${root}/install/${patchline}/package/game/latest/Assets.zip" + '"'
+    def modPaths = []
+    if (includes_pack.toBoolean()) {
+        modPaths << '$PROJECT_DIR$/src/main'
+    }
+    if (extraModIdeaPaths != null) {
+        extraModIdeaPaths.each { p ->
+            if (p != null && !p.toString().isBlank()) {
+                modPaths << p.toString()
+            }
+        }
+    }
+    if (load_user_mods.toBoolean()) {
+        modPaths << "${root}/UserData/Mods"
+    }
+    if (!modPaths.isEmpty()) {
+        programParameters += ' --mods="' + modPaths.join(',') + '"'
+    }
+    return programParameters
+}
+
 def parseArgs(String argsStr) {
     def args = []
     def current = new StringBuilder()
@@ -207,14 +247,14 @@ idea.project.settings.runConfigurations {
     'HytaleServer (EditorWeb)'(org.jetbrains.gradle.ext.Application) {
         mainClass = 'com.hypixel.hytale.Main'
         moduleName = project.idea.module.name + '.main'
-        programParameters = createServerRunArguments([])
-        workingDirectory = serverRunDir.absolutePath
+        programParameters = createServerRunArgumentsForIdea([])
+        workingDirectory = '$PROJECT_DIR$/run'
     }
     'HytaleServer + Skylandsea (EditorWeb)'(org.jetbrains.gradle.ext.Application) {
         mainClass = 'com.hypixel.hytale.Main'
         moduleName = project.idea.module.name + '.main'
-        programParameters = createServerRunArguments([skylandseaDevModRoot()])
-        workingDirectory = serverRunDir.absolutePath
+        programParameters = createServerRunArgumentsForIdea(['$PROJECT_DIR$/../skylandsea-plugin/src/main'])
+        workingDirectory = '$PROJECT_DIR$/run'
     }
 }
 
@@ -236,4 +276,57 @@ tasks.register('runHytaleServerWithSkylandsea', JavaExec) {
     workingDir = serverRunDir
     standardInput = System.in
     args parseArgs(createServerRunArguments([skylandseaDevModRoot()]))
+}
+
+def xmlAttrEscape(String value) {
+    XmlUtil.escapeXml(value ?: '')
+}
+
+tasks.register('generateIdeaRunConfigs') {
+    group = 'ide'
+    description = 'Creates default shared IntelliJ run configs in .run/ only when those files are missing (edits are preserved)'
+    doLast {
+        def runDir = file("${rootDir}/.run")
+
+        def moduleName = "${project.name}.main"
+        def workingDirMacro = '$PROJECT_DIR$/run'
+        def editorWebXml = """<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="HytaleServer (EditorWeb)" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="com.hypixel.hytale.Main" />
+    <module name="${xmlAttrEscape(moduleName)}" />
+    <option name="WORKING_DIRECTORY" value="${xmlAttrEscape(workingDirMacro)}" />
+    <option name="PROGRAM_PARAMETERS" value="${xmlAttrEscape(createServerRunArgumentsForIdea([]))}" />
+    <method v="2" />
+  </configuration>
+</component>
+"""
+
+        def withSkylandseaXml = """<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="HytaleServer + Skylandsea (EditorWeb)" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="com.hypixel.hytale.Main" />
+    <module name="${xmlAttrEscape(moduleName)}" />
+    <option name="WORKING_DIRECTORY" value="${xmlAttrEscape(workingDirMacro)}" />
+    <option name="PROGRAM_PARAMETERS" value="${xmlAttrEscape(createServerRunArgumentsForIdea(['$PROJECT_DIR$/../skylandsea-plugin/src/main']))}" />
+    <method v="2" />
+  </configuration>
+</component>
+"""
+
+        def editorWebFile = file("${runDir}/HytaleServer_EditorWeb.run.xml")
+        if (!editorWebFile.exists()) {
+            runDir.mkdirs()
+            editorWebFile.text = editorWebXml
+        }
+        def withSkylandseaFile = file("${runDir}/HytaleServer_Skylandsea_EditorWeb.run.xml")
+        if (!withSkylandseaFile.exists()) {
+            runDir.mkdirs()
+            withSkylandseaFile.text = withSkylandseaXml
+        }
+    }
+}
+
+idea.project.settings {
+    taskTriggers {
+        afterSync tasks.named('generateIdeaRunConfigs')
+    }
 }

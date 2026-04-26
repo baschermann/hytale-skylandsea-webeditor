@@ -1,41 +1,74 @@
-# hytale-skylandsea-editor
+# Skylandsᴇᴀ + Node web editor
 
-Hytale modding contest release: Skylandsea world/plugin, world-gen debugger web UI, and shared custom generator nodes.
+Created for the Hytale New Worlds modding contest and learning experience for WorldGen v2.
 
-## Layout
+This project comes with a custom WorldGen v2 node editor including comments, descriptions and explanations.
 
-| Directory | Role |
-|-----------|------|
-| `skylandsea-plugin` | Hytale plugin (main content). Depends on `worldgen-custom-nodes` (compiled in). |
-| `worldgen-web-editor-plugin` | Hytale plugin: HTTP API on port 15009, debugger, embeds production build of `worldgen-web-editor` in the jar. Optional dependency on `de.krah.skylandsea:SkylandseaPlugin`. |
-| `worldgen-web-editor` | Vue 3 + Vite UI; dev with `npm run dev`, production output consumed by `worldgen-web-editor-plugin` Gradle `jar`. |
-| `worldgen-custom-nodes` | Java library: custom density/position nodes. Used by `skylandsea-plugin` and referenced from the UI assets. |
+Feel free to use this as a starting point for your projects and learn how the world generation works.
+I know that it's not the most impressive in terms of artistic vision, but I simply ran out of time as the technical side kicked my ass and I focused on understand how the world gen works. I'm talking about you, density. 
+
+ToDo Image of Island and Editor
+
+# Usage of AI
+
+All the code is created with AI due to time constraints. Boycott it or not, I don't care. I'm a professional software developer and see AI as a tool which has it's uses, especially in prototyping.
+- My time is severely limited due to my day job
+- Hytale server source has not yet been released. Decompiled code is not fun to read & there are no official APIs. As far as I have seen, a lot is also to change as many systems need to be reworked, which afaik, is what the Hytale team is currently doing. So investing a large portion of my time into it makes no sense. But the java part is lightweight anyways, except for that one custom node.
+- My last website is 9 years ago. Properly learning how to do one is a project in itself. But I see no reason for creating a GUI other than web nowadays. Except if you want me to do it in AWT or Swing? ;) 
+- I'm not even sure what I wanted/needed in the beginning
+
+# How to run
+
+## Hytale ready jars can be found on CurseForge
+
+
+
+TODO
 
 ## Prerequisites
 
-- **JDK**: 25 (see each `gradle.properties` `java_version`).
+### Java
+I personally use IDEA IntelliJ. The community edition is completely fine. See official setup: https://hytalemodding.dev/en/docs/guides/plugin/setting-up-env
+
+Used for
+- `skylandsea-plugin`
+- `worldgen-web-editor-plugin`
+- `worldgen-custom-nodes`
+
+### Node + NPM + Vue
+I personally use WebStorm. Again, the community edition is fine. How to set it up? No idea. I'm fighting this thing every day. Why is everything so complicated and why is the dependency file 7000 lines long? I just want a simple website :(. There is a readme in the project from the vue guys.
+
 - **Node**: `^20.19.0` or `>=22.12.0` (see `worldgen-web-editor/package.json` `engines`). `npm` on `PATH` (Windows: `npm.cmd` for Gradle).
-- **Hytale**: installed so Gradle can resolve `HytaleServer.jar` under `%USERPROFILE%\AppData\Roaming\Hytale` (Windows), or set `-Phytale_home=...` / `hytale_home` in `gradle.properties` for other layouts.
 
-## Build (release jars)
+Used for
+- `worldgen-web-editor`
 
-From repo root, each project has its own Gradle wrapper.
+### Hytale
+I'm on Windows OS.
 
-```text
-worldgen-custom-nodes\gradlew.bat jar
-skylandsea-plugin\gradlew.bat jar
-worldgen-web-editor-plugin\gradlew.bat jar
-```
+- **Hytale**: Resolved and used by Gradle. `HytaleServer.jar` under `%USERPROFILE%\AppData\Roaming\Hytale` (Windows), or set `-Phytale_home=...` / `hytale_home` in `gradle.properties` for other OS
 
-(non-Windows: `./gradlew` in each directory.)
+## Overview and setup
 
-Outputs:
+### Single folder structure
+Clone the repo into a single folder, as the modules are referencing each other by going up one folder via /../
 
-- `skylandsea-plugin/build/libs/skylandsea-1.0.0.jar`
-- `worldgen-web-editor-plugin/build/libs/hytale-worldgen-v2-editor-web-1.0.0.jar`
+| Directory |                                                                                                                                                                                                     |
+|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `skylandsea-plugin` | Hytale java plugin. Depends on `worldgen-custom-nodes` which are packaged into the jar.                                                                                                                 |
+| `worldgen-web-editor-plugin` | Hytale java plugin. Webserver served on port 15009 (configurable, see below). Embeds production build of `worldgen-web-editor` in the jar. Optional dependency on `de.krah.skylandsea:SkylandseaPlugin`. |
+| `worldgen-web-editor` | Node Web editor - Vue 3 + Vite UI                                                                                                                                                                       |
+| `worldgen-custom-nodes` | Java library: Custom WorldGen v2 nodes. Used by `skylandsea-plugin` and referenced from the web editor.                                                                                                 |
 
-`worldgen-web-editor-plugin` `jar` runs `npm ci` and `npm run build-only` in `worldgen-web-editor`, then packs `dist/` into the plugin jar under `node-editor-web/`.
 
-## Run (dev)
+### Build Hytale ready release jars
 
-Hytale server run tasks live in each plugin’s `build.gradle` (`runHytaleServer`, etc.); they need a local Hytale install and use `patchline` from that project’s `gradle.properties` (default `release`).
+Use the `build` gradle task in `skylandsea-plugin` and `worldgen-web-editor-plugin` to create the respective java Hytale plugin jars.
+
+### Run development
+
+The `skylandsea-plugin` should auto-build run configurations from Gradle. When opened first time in IntelliJ, let it sync with gradle. On the top click on the drop down menu and there should be two entries.
+
+**HytaleServer (Skylandsea):** Is the pure Skylandsᴇᴀ plugin. It auto starts a Hytale server which you can connect to via localhost. Make sure to use the run configuration and not the gradle run task, as you need to auth the server. If you use the gradle task, the console won't take commands. See ´Authentication´ on the official Hytale docs: https://support.hytale.com/hc/en-us/articles/45326769420827-Hytale-Server-Manual
+
+**HytaleServer + WorldGenDebugger (Skylandsea):** Starts a hytale server with both the Skylandsᴇᴀ and the `worldgen-web-editor-plugin` (references by directory). **Note:** Start the web editor from the `worldgen-web-editor` folder inside WebStorm and have it both run at the same time.
