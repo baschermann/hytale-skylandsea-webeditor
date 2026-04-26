@@ -1,15 +1,15 @@
 {
     "Group": "de.krah.skylandsea",
-    "Name": "SkylandseaPlugin",
+    "Name": "Skylands\u1d07\u1d00",
     "Version": "1.0.0",
-    "Description": "Skylandsea map asset pack and world generator graphs",
+    "Description": "Floating island map - New Worlds Contest",
     "Authors": [
         {
             "Name": "Krah"
         }
     ],
     "Website": "",
-    "ServerVersion": "2026.02.19-1a311a592",
+    "ServerVersion": "2026.03.26-89796e57b",
     "Dependencies": {
         "Hytale:HytaleGenerator": "1.0.0"
     },

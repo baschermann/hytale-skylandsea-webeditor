@@ -6,6 +6,28 @@ function vueFlowEdgeKey(e: Pick<Edge, 'source' | 'target' | 'sourceHandle' | 'ta
 }
 
 /**
+ * Vue Flow sometimes persists edges without `sourceHandle`. `serializeGraph` only
+ * attaches children when `sourceHandle` matches the schema pin (`Entries`, etc.),
+ * so missing handles drop all but one child — Weighted.Prop then saves a single
+ * `Entries` branch and generation always picks one variant.
+ */
+function inferMissingSourceHandle(e: Edge, nodeMap: Map<string, Node>): Edge {
+  const sh = e.sourceHandle
+  if (sh != null && sh !== '') return e
+  const src = nodeMap.get(e.source)
+  if (!src || !isHytaleFlowNode(src)) return e
+  const outs = (src.data as { definition: NodeDefinition }).definition.Outputs
+  if (outs.length === 1) {
+    return { ...e, sourceHandle: outs[0].Id }
+  }
+  const multi = outs.filter((o) => o.Multiple === true)
+  if (multi.length === 1) {
+    return { ...e, sourceHandle: multi[0].Id }
+  }
+  return e
+}
+
+/**
  * Editor-only metadata under `$NodeEditorMetadata` (ignored by the game runtime):
  * - `$Nodes[id].$Position` — canvas layout
  * - `$Nodes[id].$DisplayTitle` — user override for the node header (optional)
@@ -20,6 +42,7 @@ function mergePersistedVueFlowEdges(nodes: Node[], edges: Edge[], metadata: Reco
   if (!Array.isArray(raw) || raw.length === 0) return
 
   const ids = new Set(nodes.map((n) => n.id))
+  const nodeMap = new Map(nodes.map((n) => [n.id, n]))
   const seen = new Set(edges.map((e) => vueFlowEdgeKey(e)))
 
   for (const row of raw) {
@@ -34,13 +57,14 @@ function mergePersistedVueFlowEdges(nodes: Node[], edges: Edge[], metadata: Reco
     const sourceHandle = typeof sh === 'string' && sh.length > 0 ? sh : undefined
     const targetHandle = typeof th === 'string' && th.length > 0 ? th : undefined
 
-    const e: Edge = {
+    let e: Edge = {
       id: `e-persist-${source}-${sourceHandle ?? ''}-${target}-${targetHandle ?? ''}`,
       source,
       sourceHandle,
       target,
       targetHandle,
     }
+    e = inferMissingSourceHandle(e, nodeMap)
     const k = vueFlowEdgeKey(e)
     if (seen.has(k)) continue
     seen.add(k)
@@ -493,7 +517,8 @@ export function serializeGraph(
 
   const hytaleNodes = nodes.filter(isHytaleFlowNode)
   const hytaleIds = new Set(hytaleNodes.map(n => n.id))
-  const hytaleEdges = edges.filter(e => hytaleIds.has(e.source) && hytaleIds.has(e.target))
+  const hytaleEdgesRaw = edges.filter(e => hytaleIds.has(e.source) && hytaleIds.has(e.target))
+  const hytaleEdges = hytaleEdgesRaw.map((e) => inferMissingSourceHandle(e, nodeMap))
   const incomingFromHytale = new Set(hytaleEdges.map(e => e.target))
   const roots = hytaleNodes.filter(n => !incomingFromHytale.has(n.id))
 

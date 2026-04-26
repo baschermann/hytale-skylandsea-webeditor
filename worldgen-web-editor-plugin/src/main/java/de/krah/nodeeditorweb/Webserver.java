@@ -1,5 +1,6 @@
 package de.krah.nodeeditorweb;
 
+import com.hypixel.hytale.logger.HytaleLogger;
 import org.apache.catalina.Context;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.startup.Tomcat;
@@ -33,6 +34,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class Webserver {
+    private static final HytaleLogger LOGGER = HytaleLogger.forEnclosingClass();
     private static volatile EditorWebRuntimeConfig runtimeConfig =
             new EditorWebRuntimeConfig(15009, false, Path.of("editor-web.properties"));
     /**
@@ -115,6 +117,7 @@ public class Webserver {
                 // Spring context setup
                 AnnotationConfigWebApplicationContext springContext = new AnnotationConfigWebApplicationContext();
                 springContext.setServletContext(context.getServletContext());
+                springContext.setClassLoader(Webserver.class.getClassLoader());
                 springContext.register(AppConfig.class);
                 springContext.register(DensityUpdateService.class);
                 springContext.register(NodeEditorCollaborationService.class);
@@ -130,7 +133,13 @@ public class Webserver {
                 String bindTarget = runtimeConfig.allowNonLocalhost() ? "all interfaces" : "127.0.0.1 only";
                 System.out.println("[Webserver] Starting on " + bindTarget + " (port " + runtimeConfig.port() + ")...");
                 tomcat.start();
-                System.out.println("[Webserver] Running!");
+                String publicBase = editorUrlForPlayers();
+                LOGGER.atInfo().log(
+                        "Node editor HTTP server is serving at %s (port %d, %s)",
+                        publicBase,
+                        runtimeConfig.port(),
+                        bindTarget);
+                System.out.println("[Webserver] Running at " + publicBase + " (port " + runtimeConfig.port() + ")");
 
                 // Keep-alive only (no test payload – client would refetch on every message)
                 Thread keepAliveThread = new Thread(() -> {
@@ -194,7 +203,7 @@ public class Webserver {
          */
         @GetMapping(value = {"/", "/density-viewer", "/density-viewer/**"}, produces = MediaType.TEXT_HTML_VALUE)
         public ResponseEntity<Resource> nodeEditorSpa() {
-            Resource index = new ClassPathResource("node-editor-web/index.html");
+            Resource index = new ClassPathResource("node-editor-web/index.html", Webserver.class.getClassLoader());
             if (!index.exists()) {
                 return ResponseEntity.notFound().build();
             }
@@ -280,6 +289,7 @@ public class Webserver {
                         ? EditorPaths.defaultGraphPath()
                         : EditorPaths.graphPathForWorld(worldName);
                 if (!Files.isRegularFile(graphPath)) {
+                    EditorGraphLoadNotifier.biomeGraphFileNotFound(graphPath, worldName);
                     return ResponseEntity.notFound().build();
                 }
                 return ResponseEntity.ok().body(Files.readString(graphPath, StandardCharsets.UTF_8));

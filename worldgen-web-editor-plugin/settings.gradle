@@ -1,1 +1,4 @@
 rootProject.name = 'worldgen-web-editor-plugin'
+
+include ':worldgen-custom-nodes'
+project(':worldgen-custom-nodes').projectDir = file('../worldgen-custom-nodes')

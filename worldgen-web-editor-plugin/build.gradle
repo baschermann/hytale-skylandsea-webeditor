@@ -43,7 +43,7 @@ if (!project.hasProperty('hytaleHome')) {
 }
 
 base {
-    archivesName = 'worldgen-web-editor-plugin'
+    archivesName = 'worldgen-web-editor'
 }
 
 java {
@@ -115,18 +115,26 @@ def hytaleServerJar = file("${hytaleHome}/install/${patchline}/package/game/late
 
 dependencies {
     implementation(files(hytaleServerJar))
+    implementation(project(':worldgen-custom-nodes'))
     implementation('org.springframework:spring-webmvc:7.0.6')
     implementation('org.apache.tomcat.embed:tomcat-embed-core:11.0.21')
 }
 
 // Default jar only contains plugin classes; the server does not put this project's Gradle deps on the mod classpath.
 // Bundle runtime libraries (Spring, Tomcat, …) but not HytaleServer.jar, which the host already provides.
+// worldgen-custom-nodes: explicit classes (same as skylandsea-plugin); omit from zipTree so we do not duplicate classes
+// or feed zipTree a Gradle project classes directory (not a zip).
 tasks.named('jar', org.gradle.jvm.tasks.Jar) {
-    dependsOn 'writeDefaultRuntimeConfig'
+    dependsOn 'writeDefaultRuntimeConfig', ':worldgen-custom-nodes:classes'
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from(project(':worldgen-custom-nodes').sourceSets.main.output)
     from {
-        configurations.runtimeClasspath.findAll { dep ->
-            !dep.name.equalsIgnoreCase('HytaleServer.jar')
+        configurations.runtimeClasspath.findAll { File dep ->
+            if (dep.name.equalsIgnoreCase('HytaleServer.jar')) {
+                return false
+            }
+            def p = dep.absolutePath.replace('\\', '/')
+            return !p.contains('/worldgen-custom-nodes/')
         }.collect { zipTree(it) }
     }
 }
@@ -283,8 +291,8 @@ def xmlAttrEscape(String value) {
 }
 
 tasks.register('generateIdeaRunConfigs') {
-    group = 'ide'
-    description = 'Creates default shared IntelliJ run configs in .run/ only when those files are missing (edits are preserved)'
+    group = 'application'
+    description = 'Creates default Application run configs in .run/ when missing (./gradlew generateIdeaRunConfigs).'
     doLast {
         def runDir = file("${rootDir}/.run")
 
@@ -322,11 +330,5 @@ tasks.register('generateIdeaRunConfigs') {
             runDir.mkdirs()
             withSkylandseaFile.text = withSkylandseaXml
         }
-    }
-}
-
-idea.project.settings {
-    taskTriggers {
-        afterSync tasks.named('generateIdeaRunConfigs')
     }
 }

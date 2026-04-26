@@ -1,6 +1,6 @@
 {
     "Group": "de.krah.worldgenwebeditor",
-    "Name": "EditorWeb",
+    "Name": "WorldGen v2 - Node Web Editor",
     "Version": "1.0.0",
     "Description": "Node editor HTTP API and world generation debugger",
     "Authors": [
@@ -9,7 +9,7 @@
         }
     ],
     "Website": "",
-    "ServerVersion": "2026.02.19-1a311a592",
+    "ServerVersion": "2026.03.26-89796e57b",
     "Dependencies": {
         "Hytale:HytaleGenerator": "1.0.0"
     },

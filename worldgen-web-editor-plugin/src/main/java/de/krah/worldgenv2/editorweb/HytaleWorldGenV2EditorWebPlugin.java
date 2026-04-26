@@ -14,12 +14,19 @@ import de.krah.nodeeditorweb.EditorWebRuntimeConfig;
 import de.krah.nodeeditorweb.ViewportRefreshService;
 import de.krah.nodeeditorweb.Webserver;
 import de.krah.worldgen.WorldGenDebugger;
+import de.krah.worldgen.customnodes.CustomDensityNodeRegistry;
+import de.krah.worldgen.customnodes.CustomPositionProviderRegistry;
 
 import javax.annotation.Nonnull;
 
 /**
  * HTTP node editor, collaboration, and world generation debugger (density instrumentation).
- * Load alongside a map plugin (for example {@code skylandsea}) that registers custom density codecs.
+ *
+ * <p>Registers {@code worldgen-custom-nodes} codecs so biome JSON decodes when Skylandsea is deployed as an
+ * asset-only folder (no Java {@code Main}). If {@code SkylandseaPlugin} is also a loaded jar and calls the same
+ * {@code registerAll()} methods, {@link com.hypixel.hytale.assetstore.codec.AssetCodecMapCodec} replaces entries
+ * for the same {@code Type} id — fine when both mods ship the same custom-node version; avoid mixing mismatched
+ * builds of {@code worldgen-custom-nodes}.</p>
  */
 public class HytaleWorldGenV2EditorWebPlugin extends JavaPlugin {
 
@@ -33,6 +40,9 @@ public class HytaleWorldGenV2EditorWebPlugin extends JavaPlugin {
 
     @Override
     protected void setup() {
+        CustomDensityNodeRegistry.registerAll();
+        CustomPositionProviderRegistry.registerAll();
+
         runtimeConfig = EditorWebRuntimeConfig.loadOrCreate(getDataDirectory(), LOGGER);
         Webserver.init(runtimeConfig);
         LOGGER.atInfo().log(
@@ -43,9 +53,8 @@ public class HytaleWorldGenV2EditorWebPlugin extends JavaPlugin {
 
         getEventRegistry().register(PlayerConnectEvent.class, event ->
                 event.getPlayerRef().sendMessage(Message.raw(
-                        "[WorldGen Editor] URL: " + Webserver.editorUrlForPlayers()
-                                + " | External access: " + (Webserver.isExternalAccessEnabled() ? "ENABLED" : "DISABLED")
-                                + " | Config: " + runtimeConfig.path().toAbsolutePath()
+                        "[WorldGen WebEditor] Access via http://localhost:15009/"
+                                + " | External access is " + (Webserver.isExternalAccessEnabled() ? "enabled" : "disabled")
                 )));
 
         getEventRegistry().register(LoadedAssetsEvent.class, BiomeAsset.class,

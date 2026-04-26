@@ -1,6 +1,5 @@
 plugins {
     id 'java'
-    id 'org.jetbrains.gradle.plugin.idea-ext' version '1.3'
 }
 
 import groovy.json.JsonOutput
@@ -174,8 +173,21 @@ def parseArgs(String argsStr) {
     return args
 }
 
-def editorDevModRoot() {
-    file("${rootDir}/../worldgen-web-editor-plugin/src/main").absolutePath
+def editorDevModLibsDir() {
+    file("${rootDir}/../worldgen-web-editor-plugin/build/libs").absolutePath
+}
+
+def worldgenWebEditorProjectDir = file("${rootDir}/../worldgen-web-editor-plugin")
+def worldgenWebEditorGradlew = new File(
+        worldgenWebEditorProjectDir,
+        OperatingSystem.current().isWindows() ? "gradlew.bat" : "gradlew"
+)
+
+tasks.register('buildWorldgenWebEditorJar', Exec) {
+    group = 'build'
+    description = 'Builds the worldgen-web-editor-plugin fat jar (Spring/Tomcat + Vue dist); required for WorldGen debugger dev run'
+    workingDir = worldgenWebEditorProjectDir
+    commandLine(worldgenWebEditorGradlew.absolutePath, 'jar', '--no-daemon')
 }
 
 tasks.register('runHytaleServer', JavaExec) {
@@ -190,10 +202,11 @@ tasks.register('runHytaleServer', JavaExec) {
 tasks.register('runHytaleServerWithWorldGenDebugger', JavaExec) {
     group = 'application'
     description = 'Runs skylandsea together with the node editor / world gen debugger plugin'
+    dependsOn 'buildWorldgenWebEditorJar'
     mainClass = 'com.hypixel.hytale.Main'
     classpath = sourceSets.main.runtimeClasspath
     workingDir = serverRunDir
-    args parseArgs(createServerRunArguments([editorDevModRoot()]))
+    args parseArgs(createServerRunArguments([editorDevModLibsDir()]))
 }
 
 def xmlAttrEscape(String value) {
@@ -201,8 +214,8 @@ def xmlAttrEscape(String value) {
 }
 
 tasks.register('generateIdeaRunConfigs') {
-    group = 'ide'
-    description = 'Creates default shared IntelliJ run configs in .run/ only when those files are missing (edits are preserved)'
+    group = 'application'
+    description = 'Creates default Application run configs in .run/ when missing (./gradlew generateIdeaRunConfigs). Do not add Gradle run configs from other projects to this .run folder; invalid GradleRunConfiguration XML breaks IntelliJ 2025.3 sync.'
     doLast {
         def runDir = file("${rootDir}/.run")
 
@@ -224,7 +237,7 @@ tasks.register('generateIdeaRunConfigs') {
     <option name="MAIN_CLASS_NAME" value="com.hypixel.hytale.Main" />
     <module name="${xmlAttrEscape(moduleName)}" />
     <option name="WORKING_DIRECTORY" value="${xmlAttrEscape(workingDirMacro)}" />
-    <option name="PROGRAM_PARAMETERS" value="${xmlAttrEscape(createServerRunArgumentsForIdea(['$PROJECT_DIR$/../worldgen-web-editor-plugin/src/main']))}" />
+    <option name="PROGRAM_PARAMETERS" value="${xmlAttrEscape(createServerRunArgumentsForIdea(['$PROJECT_DIR$/../worldgen-web-editor-plugin/build/libs']))}" />
     <method v="2" />
   </configuration>
 </component>
@@ -240,11 +253,5 @@ tasks.register('generateIdeaRunConfigs') {
             runDir.mkdirs()
             withDebuggerFile.text = withDebuggerXml
         }
-    }
-}
-
-idea.project.settings {
-    taskTriggers {
-        afterSync tasks.named('generateIdeaRunConfigs')
     }
 }

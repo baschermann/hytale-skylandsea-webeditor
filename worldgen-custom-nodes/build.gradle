@@ -1,6 +1,5 @@
 plugins {
     id 'java-library'
-    id 'org.jetbrains.gradle.plugin.idea-ext' version '1.3'
 }
 
 import groovy.xml.XmlUtil
@@ -50,8 +49,8 @@ def xmlAttrEscape(String value) {
 }
 
 tasks.register('generateIdeaRunConfigs') {
-    group = 'ide'
-    description = 'Creates default shared IntelliJ run configs in .run/ only when those files are missing (edits are preserved)'
+    group = 'application'
+    description = 'Creates Build_worldgen-custom-nodes Gradle run config in this module .run/ when missing. Run ./gradlew generateIdeaRunConfigs from the worldgen-custom-nodes project only.'
     doLast {
         def runDir = file("${rootDir}/.run")
 
@@ -61,6 +60,7 @@ tasks.register('generateIdeaRunConfigs') {
     <ExternalSystemSettings>
       <option name="executionName" />
       <option name="externalProjectPath" value="\$PROJECT_DIR\$" />
+      <option name="externalSystemIdString" value="GRADLE" />
       <option name="taskDescriptions">
         <list />
       </option>
@@ -84,15 +84,6 @@ tasks.register('generateIdeaRunConfigs') {
         if (!buildRunFile.exists()) {
             runDir.mkdirs()
             buildRunFile.text = gradleBuildXml
-        }
-    }
-}
-
-def ideaProject = project.extensions.findByName('idea')?.project
-if (ideaProject != null) {
-    idea.project.settings {
-        taskTriggers {
-            afterSync tasks.named('generateIdeaRunConfigs')
         }
     }
 }
