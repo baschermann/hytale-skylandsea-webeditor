@@ -2,7 +2,7 @@
 
 Created for the Hytale New Worlds modding contest and learning experience for WorldGen v2.
 
-This project comes with a custom WorldGen v2 node editor including comments, descriptions and explanations.
+This project comes with an **optional** custom WorldGen v2 node editor including comments, descriptions and explanations.
 
 Feel free to use this as a starting point for your projects and learn how the world generation works.
 I know that it's not the most impressive in terms of artistic vision, but I simply ran out of time as the technical side kicked my ass. I focused on understand how the world gen works and how I can bring ideas into virtual reality. I'm talking about you, density.
