@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, reactive, ref, unref, watch } from 'vue';
-import { useRouter } from 'vue-router';
 import type { DensityMeshResponse } from '@/services/density-nodes';
 import { fetchDensityMesh } from '@/services/density-nodes';
 import { createBasicScene } from '@/three/basicScene';
@@ -9,7 +8,6 @@ import { toBlob } from 'html-to-image';
 import * as THREE from 'three';
 
 const store = useEditorStore();
-const router = useRouter();
 
 const targetFpsLocal = ref('60');
 const minResLocal = ref('15');
@@ -1228,16 +1226,6 @@ watch(
   () => state.layers,
   () => applyLayerVisibility(),
   { deep: true }
-);
-
-// Auto-close 3D view when no debug data is available (e.g. after clear cache or node has no density)
-watch(
-  () => [state.field, state.error, state.layers[0]?.loading] as const,
-  ([field, error, resultLoading]) => {
-    if (field == null && error != null && !resultLoading) {
-      router.push('/');
-    }
-  }
 );
 
 watch(

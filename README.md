@@ -5,9 +5,9 @@ Created for the Hytale New Worlds modding contest and learning experience for Wo
 This project comes with a custom WorldGen v2 node editor including comments, descriptions and explanations.
 
 Feel free to use this as a starting point for your projects and learn how the world generation works.
-I know that it's not the most impressive in terms of artistic vision, but I simply ran out of time as the technical side kicked my ass. I focused on understand how the world gen works and how I can bring ideas into virtual reality. I'm talking about you, density. 
+I know that it's not the most impressive in terms of artistic vision, but I simply ran out of time as the technical side kicked my ass. I focused on understand how the world gen works and how I can bring ideas into virtual reality. I'm talking about you, density.
 
-ToDo Image of Island and Editor
+![Skylandsea](docs/readme/images/Skylandsea_1.jpg)
 
 # Usage of AI
 
@@ -86,7 +86,7 @@ It should open in the normal node editor. There should also be some json files i
 
 # Node Web Editor
 
-ToDo image
+![node-web-editor.png](docs/readme/images/node-web-editor.png)
 
 Accessed via http://localhost:5173/ when running dev. Standalone is the same port as the plugin on http://localhost:15009/
 
