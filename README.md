@@ -26,7 +26,7 @@ All art assets are stock Hytale. There is a whole Skylands weather and Skybox th
 
 No release files on GitHub as downloads count to 10% of contest score.
 
-TODO link to cursor
+https://www.curseforge.com/hytale/worlds/skylandsea
 
 ## Prerequisites
 
