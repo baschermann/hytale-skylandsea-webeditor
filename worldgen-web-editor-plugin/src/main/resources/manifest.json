@@ -1,8 +1,8 @@
 {
     "Group": "de.krah.worldgenwebeditor",
     "Name": "WorldGen v2 - Node Web Editor",
-    "Version": "1.0.0",
-    "Description": "Node editor HTTP API and world generation debugger",
+    "Version": "1.0.2",
+    "Description": "",
     "Authors": [
         {
             "Name": "Krah"
